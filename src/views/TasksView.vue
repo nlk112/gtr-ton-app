@@ -7,35 +7,76 @@ import icox from '@/assets/iconx.svg'
 import iconds from '@/assets/iconds.svg'
 import icontg from '@/assets/iconTG.png'
 
-const friends = ref([
-    { id: 1, name: 'Подписаться на твиттер', avatar: icox },
-    { id: 2, name: 'Подписаться на дискорд', avatar: iconds },
-    { id: 3, name: 'Подписаться на телеграмм', avatar: icontg },
-    { id: 4, name: 'Ожидает финального текста', avatar: iconds },
-    { id: 5, name: 'Ожидает финального текста', avatar: icox },
-    { id: 6, name: 'Ожидает финального текста', avatar: iconds },
-    { id: 7, name: 'Ожидает финального текста', avatar: icox },
+// 1. Описываем интерфейс для нашего задания, чтобы TypeScript помогал с подсказками
+interface Task {
+    id: number;
+    name: string;
+    avatar: string;
+    description: string;
+    link: string;
+    reward: number;
+}
+
+// 2. Добавляем данные в массив
+const friends = ref<Task[]>([
+    { 
+        id: 1, 
+        name: 'Подписаться на X', 
+        avatar: icox, 
+        description: 'Подпишитесь на наш официальный аккаунт в X (Twitter), чтобы первыми узнавать все новости проекта.',
+        link: 'https://x.com/gtfrtoken',
+        reward: 1
+    },
+    { 
+        id: 2, 
+        name: 'Подписаться на Telegram', 
+        avatar: icontg, 
+        description: 'Вступайте в наше официальное сообщество в Telegram. Там мы проводим розыгрыши и общаемся.',
+        link: 'https://t.me/GTRTon',
+        reward: 1
+    },
+    { id: 3, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 4, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 5, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 6, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 7, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
 ])
 
 const isTaskModalOpen = ref(false)
-const selectedTask = ref('')
+// 3. Теперь храним весь объект задания, а не только имя
+const selectedTask = ref<Task | null>(null)
 
-const openTaskModal = (taskName: string) => {
-    selectedTask.value = taskName
+const openTaskModal = (task: Task) => {
+    selectedTask.value = task
     isTaskModalOpen.value = true
 }
 
 const closeTaskModal = () => {
     isTaskModalOpen.value = false
+    setTimeout(() => selectedTask.value = null, 300) // очищаем после завершения анимации закрытия
+}
+
+// 4. Функция для открытия ссылки из задания
+const handleGoToLink = () => {
+    if (!selectedTask.value?.link) return;
+
+    const url = selectedTask.value.link;
+
+    if ((window as any).Telegram && (window as any).Telegram.WebApp) {
+        const tg = (window as any).Telegram.WebApp;
+        if (url.includes('t.me')) {
+            tg.openTelegramLink(url);
+        } else {
+            tg.openLink(url);
+        }
+    } else {
+        window.open(url, '_blank');
+    }
 }
 
 const handleCheckCompletion = () => {
-    console.log('Проверка выполнения:', selectedTask.value)
-    closeTaskModal()
-}
-
-const handleGetReward = () => {
-    console.log('Получение награды:', selectedTask.value)
+    console.log(`Проверка выполнения задания: ${selectedTask.value?.name}. Награда: ${selectedTask.value?.reward}`)
+    // Тут в будущем будет запрос к бэкенду на проверку подписки
     closeTaskModal()
 }
 </script>
@@ -53,7 +94,7 @@ const handleGetReward = () => {
         
         <div class="friends-header">
             Tasks
-            <span class="tasks-counter">10/12</span>
+            <!-- <span class="tasks-counter">10/12</span> -->
         </div>
 
         <div class="friends-container">
@@ -61,23 +102,30 @@ const handleGetReward = () => {
                 v-for="friend in friends" 
                 :key="friend.id" 
                 class="friend-card"
-                @click="openTaskModal(friend.name)"
+                @click="openTaskModal(friend)" 
             >
                 <img :src="friend.avatar" class="friend-avatar" alt="icon" />
                 <span class="friend-name">{{ friend.name }}</span>
             </div>
         </div>
 
-        <!-- Модальное окно для таска -->
         <InviteModal
+            v-if="selectedTask"
             :is-open="isTaskModalOpen"
-            title="Подробное описание задания"
-            description="описание задания\nописание задания\nописание задания\nописание задания\nописание задания\nописание задания\nописание задания\nописание задания\nописание задания"
-            primary-button-text="проверить выполнение"
-            secondary-button-text="получить награду"
+            :title="selectedTask.name"
+            
+            :description="selectedTask.reward > 0 
+                ? `${selectedTask.description}<br><br><span style='color: #FFDA7A; font-weight: 600; font-size: 16px;'>🎁 Награда: +${selectedTask.reward} GTR</span>`
+                : `${selectedTask.description}<br><br><span style='color: #888888; font-weight: 500; font-size: 16px;'>🎁 Награда: Скоро</span>`"
+            
+            primary-button-text="Перейти к заданию"
+            secondary-button-text="Проверить"
+            
+            :is-primary-disabled="selectedTask.reward === 0" 
+            
             @close="closeTaskModal"
-            @primary-click="handleCheckCompletion"
-            @secondary-click="handleGetReward"
+            @primary-click="handleGoToLink"
+            @secondary-click="handleCheckCompletion"
         />
 
         <BottomNav />
@@ -124,7 +172,7 @@ const handleGetReward = () => {
 .friends-container {
     position: fixed;
     top: 35.7vh;
-    left: 3%;
+    left: 2.5%;
     width: 94%;
     height: 50vh;
     background-color: #ff000000;  
@@ -153,7 +201,7 @@ const handleGetReward = () => {
     gap: 5%;
     height: 11.2vh;
     transition: transform 0.2s;
-    cursor: pointer; /* ← Добавлено: показывает что можно кликнуть */
+    cursor: pointer;
 }
 
 .friend-card:active {

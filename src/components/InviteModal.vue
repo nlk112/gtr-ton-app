@@ -5,6 +5,7 @@ interface Props {
     description: string
     primaryButtonText: string
     secondaryButtonText: string
+    isPrimaryDisabled?: boolean
 }
 
 const props = defineProps<Props>()
@@ -34,7 +35,7 @@ const handleSecondaryClick = () => emit('secondaryClick')
             </div>
             
             <div class="modal-actions">
-                <button class="btn-primary" @click="handlePrimaryClick">
+                <button class="btn-primary" :disabled="isPrimaryDisabled" @click="handlePrimaryClick">
                 {{ primaryButtonText }}
                 </button>
                 <button class="btn-secondary" @click="handleSecondaryClick">
@@ -194,5 +195,13 @@ const handleSecondaryClick = () => emit('secondaryClick')
 .modal-enter-from .modal-content,
 .modal-leave-to .modal-content {
     transform: scale(0.95);
+}
+
+.btn-primary:disabled {
+    background-color: #444444; 
+    color: #777777;            
+    cursor: not-allowed;       
+    transform: none !important;
+    opacity: 0.8;
 }
 </style>

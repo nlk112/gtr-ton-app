@@ -242,10 +242,10 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
         <InviteModal
             :isOpen="isDisconnectModalOpen"
-            title="Disconnect Wallet"
-            description="Are you sure you want to disconnect your TON wallet?"
-            primaryButtonText="Cancel"
-            secondaryButtonText="Disconnect"
+            title="Отключить кошелек"
+            description="Вы уверены, что хотите отключить свой TON кошелек?"
+            primaryButtonText="Отмена"
+            secondaryButtonText="Отключить"
             @close="closeDisconnectModal"
             @primaryClick="closeDisconnectModal"
             @secondaryClick="confirmDisconnect"
