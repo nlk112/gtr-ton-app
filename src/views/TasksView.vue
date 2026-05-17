@@ -6,6 +6,7 @@ import InviteModal from '@/components/InviteModal.vue'
 import icox from '@/assets/iconx.svg'
 import iconds from '@/assets/iconds.svg'
 import icontg from '@/assets/iconTG.png'
+import iconton from '@/assets/iconTON.png'
 
 // 1. Описываем интерфейс для нашего задания, чтобы TypeScript помогал с подсказками
 interface Task {
@@ -21,6 +22,14 @@ interface Task {
 const friends = ref<Task[]>([
     { 
         id: 1, 
+        name: 'Верификация кошелька', 
+        avatar: iconton, // Здесь можно использовать иконку телеграма или кошелька, когда добавишь её в ассеты
+        description: 'Для подтверждения активности аккаунта совершите тестовый перевод 0.5 TON на указанный адрес смарт-контракта. Это защитит систему от наплыва ботов.',
+        link: 'verification', 
+        reward: 1000
+    },
+    { 
+        id: 2, 
         name: 'Подписаться на X', 
         avatar: icox, 
         description: 'Подпишитесь на наш официальный аккаунт в X (Twitter), чтобы первыми узнавать все новости проекта.',
@@ -28,18 +37,17 @@ const friends = ref<Task[]>([
         reward: 1
     },
     { 
-        id: 2, 
+        id: 3, 
         name: 'Подписаться на Telegram', 
         avatar: icontg, 
         description: 'Вступайте в наше официальное сообщество в Telegram. Там мы проводим розыгрыши и общаемся.',
         link: 'https://t.me/GTRTon',
         reward: 1
     },
-    { id: 3, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
     { id: 4, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 5, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 6, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 7, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 5, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 6, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 7, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
 ])
 
 const isTaskModalOpen = ref(false)
@@ -212,7 +220,7 @@ const handleCheckCompletion = () => {
     height: 9.7vh;
     object-fit: contain;
     flex-shrink: 0;
-    margin-left: -3%;
+    margin-left: -4%;
 }
 
 .friend-name {
