@@ -11,6 +11,7 @@ const isWalletOk = ref(false)
 
 import radarBg from '@/assets/radar_background.svg'
 import { ref, computed, onMounted, watch, onUnmounted } from 'vue'
+import { TonConnectUI } from '@tonconnect/ui'
 
 import f0 from '@/assets/radar/radar_0.svg'
 import f1 from '@/assets/radar/radar_1.svg'
@@ -29,6 +30,8 @@ const radarFrames = [f0, f1, f2, f3, f4, f5, f6, f7]
 const currentFrame = ref(0)
 const isAnimating = ref(false)
 const extraCycles = ref(0)
+
+let tonConnectUI: TonConnectUI | null = null
 
 let intervalId: ReturnType<typeof setInterval> | null = null
 let timeoutId: ReturnType<typeof setTimeout> | null = null
@@ -118,7 +121,36 @@ onMounted(() => {
     } else {
         userName.value = 'Dev Mode' // Для тестов в браузере
     }
+
+    tonConnectUI = new TonConnectUI({
+        // Укажи здесь СВОЮ ссылку на манифест!
+        manifestUrl: 'https://gtr-ton-app.vercel.app/tonconnect-manifest.json'
+    });
+
+    // Подписываемся на изменение статуса (подключился/отключился)
+    tonConnectUI.onStatusChange((wallet) => {
+        if (wallet) {
+            // Кошелек успешно подключен! Меняем статус бейджика на зеленый
+            isWalletOk.value = true;
+            console.log('Подключен кошелек:', wallet.account.address);
+        } else {
+            // Кошелек отключен (красный бейджик)
+            isWalletOk.value = false;
+        }
+    });
 })
+
+const handleWalletClick = async () => {
+    if (!tonConnectUI) return;
+    
+    if (tonConnectUI.connected) {
+        // Если кошелек уже подключен, при клике можно его отключить
+        await tonConnectUI.disconnect();
+    } else {
+        // Если не подключен — открываем то самое меню со скриншота
+        await tonConnectUI.openModal();
+    }
+}
 
 watch(score, (newVal) => {
     localStorage.setItem('gtr_score', newVal.toString())
@@ -164,7 +196,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             <div class="icons-pill">
                 <img :src="historyIcon" class="pill-icon" alt="History" />
                 
-                <div class="wallet-wrapper">
+                <div class="wallet-wrapper" @click="handleWalletClick" style="cursor: pointer;">
                     <img :src="walletIcon" class="pill-icon" alt="Wallet" />
                     <img 
                     :src="isWalletOk ? statusOkIcon : statusNotOkIcon" 
