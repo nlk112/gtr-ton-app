@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="рисунок.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.76536274"
+     inkscape:cx="577.50394"
+     inkscape:cy="589.91636"
+     inkscape:window-width="2560"
+     inkscape:window-height="1417"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <filter
+       id="filter0_d_8_224"
+       x="-36.5"
+       y="-90.5"
+       width="1337"
+       height="2984"
+       filterUnits="userSpaceOnUse"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         flood-opacity="0"
+         result="BackgroundImageFix"
+         id="feFlood3" />
+      <feColorMatrix
+         in="SourceAlpha"
+         type="matrix"
+         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+         result="hardAlpha"
+         id="feColorMatrix3" />
+      <feOffset
+         dy="4"
+         id="feOffset3" />
+      <feGaussianBlur
+         stdDeviation="2"
+         id="feGaussianBlur3" />
+      <feComposite
+         in2="hardAlpha"
+         operator="out"
+         id="feComposite3" />
+      <feColorMatrix
+         type="matrix"
+         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+         id="feColorMatrix4" />
+      <feBlend
+         mode="normal"
+         in2="BackgroundImageFix"
+         result="effect1_dropShadow_8_224"
+         id="feBlend4" />
+      <feBlend
+         mode="normal"
+         in="SourceGraphic"
+         in2="effect1_dropShadow_8_224"
+         result="shape"
+         id="feBlend5" />
+    </filter>
+    <linearGradient
+       id="paint0_linear_8_224"
+       x1="632"
+       y1="-90"
+       x2="632"
+       y2="2885"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#CCCCCC"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#CCCCCC"
+         stop-opacity="0"
+         id="stop6" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       filter="url(#filter0_d_8_224)"
+       id="g3"
+       transform="matrix(0.44831612,0,0,0.09983193,-153.51789,8.9848739)">
+      <path
+         d="M -32,-90 H 1296 V 2885 H -32 Z"
+         fill="#212121"
+         id="path1" />
+      <path
+         d="M -32,-90 H 1296 V 2885 H -32 Z"
+         fill="url(#paint0_linear_8_224)"
+         fill-opacity="0.2"
+         id="path2"
+         style="fill:url(#paint0_linear_8_224)" />
+      <path
+         d="M -32,-90 H 1296 V 2885 H -32 Z"
+         stroke="#212121"
+         id="path3"
+         style="display:none" />
+    </g>
+  </g>
+</svg>
