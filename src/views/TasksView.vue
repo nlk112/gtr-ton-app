@@ -5,6 +5,10 @@ import InviteModal from '@/components/InviteModal.vue'
 
 import { TonConnectUI } from '@tonconnect/ui'
 
+const tonConnectUI = new TonConnectUI({
+    manifestUrl: 'https://ТВОЯ-ССЫЛКА-НА-VERCEL.vercel.app/tonconnect-manifest.json' // 👈 Укажи свой домен!
+});
+
 import icox from '@/assets/iconx.svg'
 import iconds from '@/assets/iconds.svg'
 import icontg from '@/assets/iconTG.png'
@@ -63,7 +67,7 @@ const openTaskModal = (task: Task) => {
 
 const closeTaskModal = () => {
     isTaskModalOpen.value = false
-    setTimeout(() => selectedTask.value = null, 300) // очищаем после завершения анимации закрытия
+    setTimeout(() => selectedTask.value = null, 300) 
 }
 
 // 4. Функция для открытия ссылки из задания
@@ -71,31 +75,28 @@ const handleGoToLink = async () => {
     if (!selectedTask.value?.link) return;
 
     if (selectedTask.value.link === 'verification') {
-        if (!TonConnectUI?.connected) {
+        if (!tonConnectUI?.connected) {
             alert('Сначала подключите кошелек на главной странице!');
             return;
         }
 
-        // Проверяем, указан ли адрес получателя в задании
         if (!selectedTask.value.address) {
             alert('Адрес кошелька для верификации не настроен.');
             return;
         }
 
         try {
-            // Формируем транзакцию
             const transaction = {
-                validUntil: Math.floor(Date.now() / 1000) + 360, // Транзакция действительна 6 минут
+                validUntil: Math.floor(Date.now() / 1000) + 360,
                 messages: [
                     {
-                        address: selectedTask.value.address, // 👈 Автоматически подставит твой адрес из массива выше!
-                        amount: "500000000" // 0.5 TON в нанотонах (соотношение 1 TON = 1 000 000 000 нанотонов)
+                        address: selectedTask.value.address, 
+                        amount: "500000000" 
                     }
                 ]
             }
 
-            // Вызываем окно подтверждения оплаты в кошельке пользователя (Tonkeeper / Wallet в ТГ)
-            await TonConnectUI.sendTransaction(transaction);
+            await tonConnectUI.sendTransaction(transaction);
             
             alert('Транзакция отправлена в сеть! Нажмите "Проверить" через минуту.');
             
@@ -106,10 +107,11 @@ const handleGoToLink = async () => {
         return;
     }
 
-    // --- ОБЫЧНЫЕ ССЫЛКИ (Twitter, Telegram, Discord) ---
     const url = selectedTask.value.link;
-    if (window.Telegram && window.Telegram.WebApp) {
-        const tg = window.Telegram.WebApp;
+    const tgWindow = window as any; 
+
+    if (tgWindow.Telegram && tgWindow.Telegram.WebApp) {
+        const tg = tgWindow.Telegram.WebApp;
         if (url.includes('t.me')) {
             tg.openTelegramLink(url);
         } else {
