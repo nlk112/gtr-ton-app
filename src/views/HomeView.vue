@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import BottomNav from '@/components/BottomNav.vue'
+import InviteModal from '@/components/InviteModal.vue'
 
 import historyIcon from '@/assets/history_icon.svg'
 import walletIcon from '@/assets/wallet_icon.svg'
@@ -24,6 +25,7 @@ import f7 from '@/assets/radar/radar_7.svg'
 
 const userName = ref('Loading...')
 const userPhoto = ref('')
+const isDisconnectModalOpen = ref(false)
 
 const radarFrames = [f0, f1, f2, f3, f4, f5, f6, f7]
 
@@ -144,12 +146,23 @@ const handleWalletClick = async () => {
     if (!tonConnectUI) return;
     
     if (tonConnectUI.connected) {
-        // Если кошелек уже подключен, при клике можно его отключить
-        await tonConnectUI.disconnect();
+        // Вместо мгновенного отключения просто открываем модалку
+        isDisconnectModalOpen.value = true;
     } else {
-        // Если не подключен — открываем то самое меню со скриншота
         await tonConnectUI.openModal();
     }
+}
+
+const confirmDisconnect = async () => {
+    if (tonConnectUI) {
+        await tonConnectUI.disconnect();
+    }
+    isDisconnectModalOpen.value = false;
+}
+
+// Функция для отмены (закрытие модалки)
+const closeDisconnectModal = () => {
+    isDisconnectModalOpen.value = false;
 }
 
 watch(score, (newVal) => {
@@ -226,6 +239,17 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             <div class="radar-wave" :key="waveKey"></div>
             <img :src="radarFrames[currentFrame]" class="radar-layer-main" alt="Radar" />
         </div>
+
+        <InviteModal
+            :isOpen="isDisconnectModalOpen"
+            title="Disconnect Wallet"
+            description="Are you sure you want to disconnect your TON wallet?"
+            primaryButtonText="Cancel"
+            secondaryButtonText="Disconnect"
+            @close="closeDisconnectModal"
+            @primaryClick="closeDisconnectModal"
+            @secondaryClick="confirmDisconnect"
+        />
         
         <BottomNav />
     </div>
