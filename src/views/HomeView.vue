@@ -281,7 +281,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     font-weight: 500;
     color: #212121; /* Контрастный цвет на желтом фоне */
     margin-left: 10px;
-    font-size: clamp(14px, 2.5vw, 18px);
+    font-size: clamp(18px, 4vw, 24px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* Добавит троеточие, если имя слишком длинное */
