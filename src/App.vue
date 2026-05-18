@@ -3,6 +3,19 @@
 
 <template>
   <router-view />
+
+  <div class="landscape-overlay">
+    <div class="landscape-content">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 4V20C7 21.1046 7.89543 22 9 22H15C16.1046 22 17 21.1046 17 20V4C17 2.89543 16.1046 2 15 2H9C7.89543 2 7 2.89543 7 4Z" stroke="#FFDA7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 18H12.01" stroke="#FFDA7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 9C20 9 22 11 22 12C22 13 20 15 20 15" stroke="#FFDA7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 15C4 15 2 13 2 12C2 11 4 9 4 9" stroke="#FFDA7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>Поверните телефон</h2>
+      <p>Для корректной работы приложения используйте вертикальную ориентацию.</p>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -40,5 +53,51 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
   pointer-events: none; 
+}
+
+/* --- СТИЛИ ДЛЯ ЗАГЛУШКИ ПОВОРОТА ЭКРАНА --- */
+.landscape-overlay {
+  display: none; /* По умолчанию скрыто */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #212121; /* Под твой дизайн */
+  z-index: 999999; /* Поверх абсолютно всего */
+  justify-content: center;
+  align-items: center;
+}
+
+.landscape-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+}
+
+.landscape-content h2 {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-size: clamp(20px, 5vw, 24px);
+  font-weight: 600;
+}
+
+.landscape-content p {
+  color: #888888;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-size: clamp(14px, 4vw, 16px);
+  line-height: 1.5;
+  max-width: 80%;
+}
+
+@media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  .landscape-overlay {
+    display: flex; 
+  }
 }
 </style>
