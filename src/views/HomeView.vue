@@ -390,7 +390,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .page-title {
     position: absolute;
-    top: 3vh;
+    top: 5vh;
     left: 0;
     width: 100%;
     font-family: 'Inter', sans-serif;
@@ -406,7 +406,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 /* 2. КНОПКА ИНФО: привязали к процентам (%) вместо vw */
 .info-button {
     position: absolute;
-    top: 3vh; 
+    top: 1.5vh; 
     right: 5%; /* 👈 Это гарантирует, что кнопка не уедет за край */
     width: clamp(28px, 4vh, 36px);
     height: clamp(28px, 4vh, 36px);
@@ -428,7 +428,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 /* 3. ВЕРХНЯЯ ПАНЕЛЬ (Юзер + Кошелек) */
 .top-bar {
     position: absolute;
-    top: 11vh;    
+    top: 13vh;    
     left: 50%;    
     transform: translateX(-50%); 
     display: flex;
@@ -483,7 +483,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 /* 4. ПРОГРЕСС И СЧЕТ */
 .progress-section {
     position: absolute;
-    top: 20vh;
+    top: 22vh;
     left: 50%;
     transform: translateX(-50%);
     width: 85%;
@@ -498,7 +498,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .score-display {
     position: absolute;
-    top: 28vh; 
+    top: 30vh; 
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Inter', sans-serif;
@@ -558,13 +558,13 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     
     /* Корректируем счёт на маленьких экранах */
     .score-display { 
-        top: 26vh; 
+        top: 27vh; 
         font-size: clamp(32px, 9vw, 58px); 
     }
     
     /* Корректируем радар на маленьких экранах */
     .radar-container { 
-        top: 58vh; 
+        top: 59vh; 
         width: clamp(200px, 55vw, 280px); 
     }
     
