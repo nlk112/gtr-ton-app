@@ -43,6 +43,35 @@ const DURATION = 1000
 const FRAME_TIME = DURATION / 8
 const QUEUE_THRESHOLD = 300 
 
+const gtrBalance = ref(0) // Баланс коинов GTR
+const isExchangeModalOpen = ref(false) // Состояние модалки обмена
+
+// Сохранение и загрузка GTR баланса
+onMounted(() => {
+    const savedGtr = localStorage.getItem('gtr_balance')
+    if (savedGtr) gtrBalance.value = parseInt(savedGtr, 10)
+})
+
+watch(gtrBalance, (newVal) => {
+    localStorage.setItem('gtr_balance', newVal.toString())
+})
+
+// Функция обмена
+const handleExchangeRP = () => {
+    if (score.value >= 1000) {
+        const exchangeAmount = Math.floor(score.value / 1000) // Сколько целых тысяч RP есть
+        const gainedGtr = exchangeAmount // В соотношении 1000 к 1
+        
+        score.value -= exchangeAmount * 1000 // Забираем RP
+        gtrBalance.value += gainedGtr // Начисляем GTR
+        
+        alert(`Обмен завершен! Вы получили ${gainedGtr} GTR`)
+        isExchangeModalOpen.value = false
+    } else {
+        alert('Недостаточно RP для обмена. Нужно минимум 1000 RP')
+    }
+}
+
 const handleRadarClick = () => {
     score.value += currentLevelInfo.value!.rpPerClick;
     
@@ -264,7 +293,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             </div>
         </div>
 
-        
+
         <div class="score-display">
             {{ score }} RP </div>
 
@@ -284,7 +313,22 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             @primaryClick="closeDisconnectModal"
             @secondaryClick="confirmDisconnect"
         />
-        
+
+        <div class="exchange-button" @click="isExchangeModalOpen = true">
+            <span class="dollar-sign">$</span>
+        </div>
+
+        <InviteModal
+            :isOpen="isExchangeModalOpen"
+            title="Обмен валюты"
+            :description="`У вас есть: ${score} RP\nВаш баланс: ${gtrBalance} GTR\n\nКурс обмена: 1000 RP = 1 GTR`"
+            primaryButtonText="Обменять 1000 RP"
+            secondaryButtonText="Отмена"
+            @close="isExchangeModalOpen = false"
+            @primaryClick="handleExchangeRP"
+            @secondaryClick="isExchangeModalOpen = false"
+        />
+
         <BottomNav />
     </div>
 </template>
@@ -525,5 +569,33 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     border-radius: 999px;
     transition: width 0.3s ease;
     width: 0%; 
+}
+
+.exchange-button {
+    position: absolute;
+    right: 8vw; /* Отступ справа */
+    bottom: 16vh; /* Над нижним меню */
+    width: clamp(50px, 12vw, 70px);
+    height: clamp(50px, 12vw, 70px);
+    background-color: #FFDA7A;
+    border-radius: 20px; /* Скругленные углы как на скрине */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+    transition: transform 0.2s;
+}
+
+.exchange-button:active {
+    transform: scale(0.9);
+}
+
+.dollar-sign {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #212121;
 }
 </style>
