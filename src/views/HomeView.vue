@@ -46,6 +46,12 @@ const QUEUE_THRESHOLD = 300
 const gtrBalance = ref(0) // Баланс коинов GTR
 const isExchangeModalOpen = ref(false) // Состояние модалки обмена
 
+// Вычисляем, какую максимальную сумму RP (кратную 1000) можно обменять прямо сейчас
+const maxExchangeableRP = computed(() => Math.floor(score.value / 1000) * 1000)
+
+// Вычисляем, сколько GTR за это веяние начислится (1000 к 1)
+const possibleGtrGained = computed(() => Math.floor(score.value / 1000))
+
 // Сохранение и загрузка GTR баланса
 onMounted(() => {
     const savedGtr = localStorage.getItem('gtr_balance')
@@ -56,16 +62,16 @@ watch(gtrBalance, (newVal) => {
     localStorage.setItem('gtr_balance', newVal.toString())
 })
 
-// Функция обмена
+// Обновленная функция моментального обмена всего доступного баланса
 const handleExchangeRP = () => {
-    if (score.value >= 1000) {
-        const exchangeAmount = Math.floor(score.value / 1000) // Сколько целых тысяч RP есть
-        const gainedGtr = exchangeAmount // В соотношении 1000 к 1
+    const totalRpToDeduct = maxExchangeableRP.value
+    const totalGtrToAward = possibleGtrGained.value
+    
+    if (totalRpToDeduct >= 1000) {
+        score.value -= totalRpToDeduct     // Списываем сразу всё доступное RP, кратное 1000
+        gtrBalance.value += totalGtrToAward // Начисляем всю сумму GTR
         
-        score.value -= exchangeAmount * 1000 // Забираем RP
-        gtrBalance.value += gainedGtr // Начисляем GTR
-        
-        alert(`Обмен завершен! Вы получили ${gainedGtr} GTR`)
+        alert(`Успешно обменено ${totalRpToDeduct} RP на ${totalGtrToAward} GTR!`)
         isExchangeModalOpen.value = false
     } else {
         alert('Недостаточно RP для обмена. Нужно минимум 1000 RP')
@@ -321,9 +327,14 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
         <InviteModal
             :isOpen="isExchangeModalOpen"
             title="Обмен валюты"
-            :description="`У вас есть: ${score} RP\nВаш баланс: ${gtrBalance} GTR\n\nКурс обмена: 1000 RP = 1 GTR`"
-            primaryButtonText="Обменять 1000 RP"
+            
+            :description="`Ваш баланс: ${score} RP\nТекущий счет: ${gtrBalance} GTR\n\nДоступно к обмену:\n${maxExchangeableRP} RP ➔ +${possibleGtrGained} GTR\n\nКурс: 1000 RP = 1 GTR`"
+            
+            :primaryButtonText="possibleGtrGained > 0 ? `Обменять ${maxExchangeableRP} RP` : 'Нечего обменивать'"
             secondaryButtonText="Отмена"
+            
+            :is-primary-disabled="possibleGtrGained === 0"
+            
             @close="isExchangeModalOpen = false"
             @primaryClick="handleExchangeRP"
             @secondaryClick="isExchangeModalOpen = false"
@@ -573,12 +584,12 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .exchange-button {
     position: absolute;
-    right: 8vw; /* Отступ справа */
-    bottom: 16vh; /* Над нижним меню */
+    right: 4vw; 
+    bottom: 12vh; 
     width: clamp(50px, 12vw, 70px);
     height: clamp(50px, 12vw, 70px);
     background-color: #FFDA7A;
-    border-radius: 20px; /* Скругленные углы как на скрине */
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
