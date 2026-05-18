@@ -264,6 +264,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             </div>
         </div>
 
+        
         <div class="score-display">
             {{ score }} RP </div>
 
