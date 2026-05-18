@@ -259,4 +259,25 @@ const handleInviteSecondaryClick = () => {
     width: 100%;
     object-fit: contain;
 }
+
+@media screen and (max-height: 700px) {
+    .page-title {
+        top: 2vh;
+    }
+
+    .invite-banner {
+        top: 8vh; /* Было 12vh */
+        min-height: 12vh;
+        gap: 1vh; /* Уменьшаем отступы внутри баннера */
+    }
+
+    .friends-header {
+        top: 26vh; /* Поднимаем заголовок списка */
+    }
+
+    .friends-container {
+        top: 32vh; /* Поднимаем сам список */
+        height: 55vh; /* Даем списку больше места, чтобы он не обрезался */
+    }
+}
 </style>

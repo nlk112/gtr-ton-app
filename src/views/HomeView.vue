@@ -196,7 +196,6 @@ const handleWalletClick = async () => {
     if (!tonConnectUI) return;
     
     if (tonConnectUI.connected) {
-        // Вместо мгновенного отключения просто открываем модалку
         isDisconnectModalOpen.value = true;
     } else {
         await tonConnectUI.openModal();
@@ -210,7 +209,6 @@ const confirmDisconnect = async () => {
     isDisconnectModalOpen.value = false;
 }
 
-// Функция для отмены (закрытие модалки)
 const closeDisconnectModal = () => {
     isDisconnectModalOpen.value = false;
 }
@@ -242,7 +240,7 @@ const levelsConfig = [
     { level: 17, clicksNeeded: 300000, rpPerClick: 30 },
     { level: 18, clicksNeeded: 500000, rpPerClick: 35 },
     { level: 19, clicksNeeded: 750000, rpPerClick: 40 },
-    { level: 20, clicksNeeded: 1000000, rpPerClick: 50 } // Максимальный уровень
+    { level: 20, clicksNeeded: 1000000, rpPerClick: 50 } 
 ]
 
 const currentLevelInfo = computed(() => {
@@ -352,7 +350,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             :isOpen="isExchangeModalOpen"
             title="Обмен валюты"
             
-            :description="`Ваш баланс: ${score} RP\nТекущий счет: ${gtrBalance} GTR\n\nДоступно к обмену:\n${maxExchangeableRP} RP ➔ +${possibleGtrGained} GTR\n\nКурс: 1000 RP = 1 GTR`"
+            :description="`Ваш баланс: <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${score} RP</span><br>Текущий счет: <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${gtrBalance} GTR</span><br><br>Доступно к обмену:<br><b>${maxExchangeableRP} RP ➔ +${possibleGtrGained} GTR</b><br><br><span style='color: #888888; font-size: 12px;'>Курс: 1000 RP = 1 GTR</span>`"
             
             :primaryButtonText="possibleGtrGained > 0 ? `Обменять ${maxExchangeableRP} RP` : 'Нечего обменивать'"
             secondaryButtonText="Отмена"
@@ -666,5 +664,47 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     font-weight: 600;
     color: #FFDA7A;
     font-style: italic;
+}
+
+/* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ (iPhone SE, старые Android и т.д.) --- */
+@media screen and (max-height: 700px) {
+    /* 1. Поднимаем верхние элементы ближе к потолку */
+    .page-title {
+        top: 2vh;
+    }
+    
+    .top-bar {
+        top: 10vh; /* Было 19vh */
+    }
+
+    /* 2. Поднимаем счетчик и прогресс */
+    .progress-section {
+        top: 20vh; /* Было 28.5vh */
+    }
+
+    .score-display {
+        top: 28vh; /* Было 36vh */
+    }
+
+    /* 3. Уменьшаем сам радар и поднимаем его */
+    .radar-container {
+        top: 55vh; /* Было 64vh */
+        width: clamp(180px, 60vw, 300px); /* Сделали его чуть меньше, чтобы он не упирался в низ */
+    }
+
+    /* 4. Немного уменьшаем кнопку обмена и прижимаем её ниже */
+    .exchange-button {
+        width: 45px;
+        height: 45px;
+        bottom: 10vh; /* Чтобы не наезжала на радар и нижнее меню */
+    }
+}
+
+/* --- ДЛЯ СОВСЕМ КРОШЕЧНЫХ ЭКРАНОВ (Меньше 600px) --- */
+@media screen and (max-height: 600px) {
+    .radar-container {
+        top: 52vh;
+        width: clamp(150px, 50vw, 250px);
+    }
 }
 </style>

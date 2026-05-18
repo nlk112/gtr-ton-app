@@ -1,4 +1,32 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
+import f0 from '@/assets/radar/radar_0.svg'
+import f1 from '@/assets/radar/radar_1.svg'
+import f2 from '@/assets/radar/radar_2.svg'
+import f3 from '@/assets/radar/radar_3.svg'
+import f4 from '@/assets/radar/radar_4.svg'
+import f5 from '@/assets/radar/radar_5.svg'
+import f6 from '@/assets/radar/radar_6.svg'
+import f7 from '@/assets/radar/radar_7.svg'
+import radarBg from '@/assets/radar_background.svg'
+
+import icox from '@/assets/iconx.svg'
+import iconds from '@/assets/iconds.svg'
+import icontg from '@/assets/iconTG.png'
+import iconton from '@/assets/iconTON.png'
+
+onMounted(() => {
+  const imagesToPreload = [
+    f0, f1, f2, f3, f4, f5, f6, f7, radarBg,
+    icox, iconds, icontg, iconton
+  ]
+
+  imagesToPreload.forEach((src) => {
+    const img = new Image()
+    img.src = src
+  })
+})
 </script>
 
 <template>
@@ -17,6 +45,8 @@
     </div>
   </div>
 </template>
+
+
 
 <style>
 *,
@@ -55,7 +85,6 @@ img {
   pointer-events: none; 
 }
 
-/* --- СТИЛИ ДЛЯ ЗАГЛУШКИ ПОВОРОТА ЭКРАНА --- */
 .landscape-overlay {
   display: none; /* По умолчанию скрыто */
   position: fixed;
