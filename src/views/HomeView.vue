@@ -550,7 +550,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     .top-bar { top: 10vh; }
     .progress-section { top: 18vh; }
     .score-display { top: 25vh; }
-    .radar-container { top: 54vh; width: clamp(180px, 50vw, 260px); }
+
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
     .dollar-sign { font-size: 24px; }
 }
