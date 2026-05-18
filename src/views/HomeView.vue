@@ -367,7 +367,6 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 </template>
 
 <style scoped>
-
 .page-container {
     width: 100%;
     height: 100vh;
@@ -389,253 +388,27 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     position: relative;
 }
 
+/* 1. ЗАГОЛОВОК: убрали vw, сделали 100% ширины для идеального центрирования */
 .page-title {
-    position: fixed;
-    top: 3.5vh;
-    left: 15vw;
-    width: 70dvw;
+    position: absolute;
+    top: 3vh;
+    left: 0;
+    width: 100%;
     font-family: 'Inter', sans-serif;
-    font-weight: 330;
+    font-weight: 300;
     color: #ffffff;
     text-align: center;
     margin: 0;
-    font-size: clamp(24px, 10vw, 128px); 
-}
-
-.top-bar {
-    position: absolute;
-    top: 19vh;    
-    left: 50%;    
-    transform: translateX(-50%); 
-    display: flex;
-    gap: clamp(8px, 1.6vw, 21px);
-}
-
-.user-pill {
-    background-color: #FFDA7A;
-    height: clamp(10px, 6.5vh, 60px);
-    width: clamp(120px, 65vw, 310px); 
-    border-radius: 999px; 
-    display: flex;
-    align-items: center;
-}
-
-.user-avatar {
-    width: clamp(24px, 4vh, 42px);
-    height: clamp(24px, 4vh, 42px);
-    border-radius: 50%;
-    margin-left: 8px; /* Отступ от левого края плашки */
-    object-fit: cover;
-}
-
-.user-avatar-fallback {
-    width: clamp(24px, 4vh, 42px);
-    height: clamp(24px, 4vh, 42px);
-    border-radius: 50%;
-    margin-left: 8px;
-    background-color: #212121; /* Темный фон под стать дизайну */
-    color: #FFDA7A; /* Желтый текст */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: clamp(12px, 2vh, 18px);
-}
-
-.user-name {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    color: #212121; /* Контрастный цвет на желтом фоне */
-    margin-left: 10px;
-    font-size: clamp(18px, 4vw, 24px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Добавит троеточие, если имя слишком длинное */
-    padding-right: 15px;
-}
-
-.icons-pill {
-    background-color: #FFDA7A;
-    height: clamp(10px, 6.5vh, 100px);
-    width: clamp(60px, 26.5vw, 110px); 
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.pill-icon {
-    height: clamp(10px, 4.1vh, 32px);
-    object-fit: contain;
-}
-
-.wallet-wrapper {
-    position: relative; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.status-badge {
-    position: absolute;
-    bottom: -13%;
-    right: +43%;
-    width: 75%; 
-    object-fit: contain;
-    pointer-events: none;
-}
-
-.radar-container {
-    position: absolute;
-    top: 64vh;  
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-    width: clamp(200px, 72.4vw, 400px);
-    aspect-ratio: 1 / 1;
-    position: absolute;
-    cursor: pointer;
-    user-select: none;
-
-}
-
-.radar-layer-bg {
-    position: absolute;
-    width: 110%;       
-    top: 50%;       
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    z-index: 0;
-    pointer-events: none;
-}
-
-.radar-wave {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 2px solid #FFDA7A;
-    box-shadow: 0 0 15px rgba(255, 218, 122, 0.4);
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
-    z-index: 1;
-    pointer-events: none;
-    will-change: transform, opacity;
-    animation: radarPulse 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-.radar-layer-main {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
-    z-index: 2;
-    pointer-events: none;
-}
-
-@keyframes radarPulse {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
-    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-}
-
-.score-display {
-    position: absolute;
-    top: 36vh; 
-    left: 50%;
-    transform: translateX(-50%);
-    
-    font-family: 'Inter', sans-serif;
-    font-weight: 300; 
-    font-size: clamp(32px, 10vw, 128px); 
-    color: #FFFFFF;
-    text-align: center;
-    white-space: nowrap;
-    
-    pointer-events: none; 
-    user-select: none;
+    font-size: clamp(20px, 6vw, 36px); 
     z-index: 10;
+    pointer-events: none; /* Чтобы клики проходили сквозь него, если он налезет на что-то */
 }
 
-.progress-section {
-    position: absolute;
-    top: 28.5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(200px, 74.3vw, 400px);
-    z-index: 5;
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1px;
-    padding: 0 5px;
-}
-
-.progress-text {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(12px, 4.7vw, 24px);
-    color: rgb(255, 255, 255);
-    font-weight: 400;
-}
-
-.level-text {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(12px, 4.7vw, 24px);
-    color: rgb(255, 255, 255);
-    font-weight: 400;
-}
-
-.progress-bar-bg {
-    width: 100%;
-    height: clamp(6px, 1.5vh, 13px);
-    background-color: rgba(217, 217, 217, 0.4);
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: rgba(217, 217, 217, 1);
-    border-radius: 999px;
-    transition: width 0.3s ease;
-    width: 0%; 
-}
-
-.exchange-button {
-    position: absolute;
-    right: 4vw; 
-    bottom: 12vh; 
-    width: clamp(50px, 12vw, 70px);
-    height: clamp(50px, 12vw, 70px);
-    background-color: #FFDA7A;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 20;
-    transition: transform 0.2s;
-}
-
-.exchange-button:active {
-    transform: scale(0.9);
-}
-
-.dollar-sign {
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: #212121;
-}
-
+/* 2. КНОПКА ИНФО: привязали к процентам (%) вместо vw */
 .info-button {
     position: absolute;
-    top: 3.5vh;
-    right: 5vw; 
+    top: 3vh; 
+    right: 5%; /* 👈 Это гарантирует, что кнопка не уедет за край */
     width: clamp(28px, 4vh, 36px);
     height: clamp(28px, 4vh, 36px);
     background-color: #212121; 
@@ -649,62 +422,136 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.info-button:active {
-    transform: scale(0.9);
-    background-color: #FFDA7A; 
+.info-button:active { transform: scale(0.9); background-color: #FFDA7A; }
+.info-button:active .info-icon { color: #212121; }
+.info-icon { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #FFDA7A; font-style: italic; }
+
+/* 3. ВЕРХНЯЯ ПАНЕЛЬ (Юзер + Кошелек) */
+.top-bar {
+    position: absolute;
+    top: 11vh;    
+    left: 50%;    
+    transform: translateX(-50%); 
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    gap: 15px;
 }
 
-.info-button:active .info-icon {
-    color: #212121; 
+.user-pill {
+    background-color: #FFDA7A;
+    height: clamp(40px, 6vh, 60px);
+    flex: 1;
+    max-width: 250px;
+    border-radius: 999px; 
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
-.info-icon {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(14px, 2vh, 18px);
-    font-weight: 600;
-    color: #FFDA7A;
-    font-style: italic;
+.user-avatar, .user-avatar-fallback {
+    width: clamp(28px, 4.5vh, 42px);
+    height: clamp(28px, 4.5vh, 42px);
+    border-radius: 50%;
+    margin-left: 6px;
+    flex-shrink: 0;
 }
 
-/* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ (iPhone SE, старые Android и т.д.) --- */
+.user-avatar { object-fit: cover; }
+.user-avatar-fallback {
+    background-color: #212121; color: #FFDA7A; 
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+}
+
+.user-name {
+    font-family: 'Inter', sans-serif; font-weight: 500; color: #212121;
+    margin-left: 10px; font-size: clamp(14px, 4vw, 18px);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px;
+}
+
+.icons-pill {
+    background-color: #FFDA7A;
+    height: clamp(40px, 6vh, 60px);
+    width: clamp(80px, 20vw, 110px); 
+    border-radius: 999px; display: flex; align-items: center; justify-content: space-evenly;
+}
+
+.pill-icon { height: clamp(20px, 3vh, 32px); object-fit: contain; }
+.wallet-wrapper { position: relative; display: flex; align-items: center; justify-content: center; }
+.status-badge { position: absolute; bottom: -10%; right: 40%; width: 75%; object-fit: contain; pointer-events: none; }
+
+/* 4. ПРОГРЕСС И СЧЕТ */
+.progress-section {
+    position: absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 400px;
+    z-index: 5;
+}
+
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 4px; padding: 0 5px; }
+.progress-text, .level-text { font-family: 'Inter', sans-serif; font-size: clamp(12px, 4vw, 16px); color: #FFF; font-weight: 400; }
+.progress-bar-bg { width: 100%; height: 10px; background-color: rgba(217, 217, 217, 0.4); border-radius: 999px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: #D9D9D9; border-radius: 999px; transition: width 0.3s ease; }
+
+.score-display {
+    position: absolute;
+    top: 27vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif; font-weight: 300; 
+    font-size: clamp(36px, 8vw, 64px); 
+    color: #FFFFFF; text-align: center; white-space: nowrap; pointer-events: none; user-select: none; z-index: 10;
+}
+
+/* 5. РАДАР */
+.radar-container {
+    position: absolute;
+    top: 58vh;  
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(220px, 65vw, 350px);
+    aspect-ratio: 1 / 1;
+    cursor: pointer; user-select: none;
+}
+
+.radar-layer-bg { position: absolute; width: 110%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
+.radar-wave {
+    position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; border-radius: 50%;
+    border: 2px solid #FFDA7A; box-shadow: 0 0 15px rgba(255, 218, 122, 0.4); opacity: 0;
+    transform: translate(-50%, -50%) scale(1); z-index: 1; pointer-events: none; will-change: transform, opacity;
+    animation: radarPulse 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.radar-layer-main { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2; pointer-events: none; }
+@keyframes radarPulse { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
+
+/* 6. КНОПКА ОБМЕНА ($) */
+.exchange-button {
+    position: absolute;
+    right: 5%; /* 👈 Проценты вместо vw */
+    bottom: 14vh; 
+    width: clamp(45px, 12vw, 65px);
+    height: clamp(45px, 12vw, 65px);
+    background-color: #FFDA7A;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); z-index: 20; transition: transform 0.2s;
+}
+
+.exchange-button:active { transform: scale(0.9); }
+.dollar-sign { font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: #212121; }
+
+/* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ --- */
 @media screen and (max-height: 700px) {
-    /* 1. Поднимаем верхние элементы ближе к потолку */
-    .page-title {
-        top: 2vh;
-    }
-    
-    .top-bar {
-        top: 10vh; /* Было 19vh */
-    }
-
-    /* 2. Поднимаем счетчик и прогресс */
-    .progress-section {
-        top: 20vh; /* Было 28.5vh */
-    }
-
-    .score-display {
-        top: 28vh; /* Было 36vh */
-    }
-
-    /* 3. Уменьшаем сам радар и поднимаем его */
-    .radar-container {
-        top: 55vh; /* Было 64vh */
-        width: clamp(180px, 60vw, 300px); /* Сделали его чуть меньше, чтобы он не упирался в низ */
-    }
-
-    /* 4. Немного уменьшаем кнопку обмена и прижимаем её ниже */
-    .exchange-button {
-        width: 45px;
-        height: 45px;
-        bottom: 10vh; /* Чтобы не наезжала на радар и нижнее меню */
-    }
-}
-
-/* --- ДЛЯ СОВСЕМ КРОШЕЧНЫХ ЭКРАНОВ (Меньше 600px) --- */
-@media screen and (max-height: 600px) {
-    .radar-container {
-        top: 52vh;
-        width: clamp(150px, 50vw, 250px);
-    }
+    .page-title, .info-button { top: 2vh; }
+    .top-bar { top: 10vh; }
+    .progress-section { top: 18vh; }
+    .score-display { top: 25vh; }
+    .radar-container { top: 54vh; width: clamp(180px, 50vw, 260px); }
+    .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
+    .dollar-sign { font-size: 24px; }
 }
 </style>
