@@ -498,7 +498,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .score-display {
     position: absolute;
-    top: 33vh; 
+    top: 28vh; 
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Inter', sans-serif;
@@ -515,7 +515,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 /* 5. РАДАР */
 .radar-container {
     position: absolute;
-    top: 66vh;  
+    top: 61vh;  
     left: 50%;
     transform: translate(-50%, -50%);
     width: clamp(250px, 76vw, 390px); 
