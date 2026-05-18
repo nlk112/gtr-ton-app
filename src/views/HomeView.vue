@@ -398,7 +398,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     color: #ffffff;
     text-align: center;
     margin: 0;
-    font-size: clamp(28px, 7vw, 48px); 
+    font-size: clamp(36px, 9vw, 64px); 
     z-index: 10;
     pointer-events: none;
 }
@@ -498,15 +498,12 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .score-display {
     position: absolute;
-    top: 26vh;
+    top: 33vh; 
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    
-    /* Тот самый красивый размер из изначальной версии 👇 */
+    font-weight: 300; 
     font-size: clamp(32px, 10vw, 128px); 
-    
     color: #FFFFFF;
     text-align: center;
     white-space: nowrap;
@@ -518,12 +515,13 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 /* 5. РАДАР */
 .radar-container {
     position: absolute;
-    top: 58vh;  
+    top: 66vh;  
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(220px, 65vw, 350px);
+    width: clamp(250px, 76vw, 390px); 
     aspect-ratio: 1 / 1;
-    cursor: pointer; user-select: none;
+    cursor: pointer;
+    user-select: none;
 }
 
 .radar-layer-bg { position: absolute; width: 110%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
@@ -558,12 +556,18 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     .top-bar { top: 10vh; }
     .progress-section { top: 18vh; }
     
+    /* Корректируем счёт на маленьких экранах */
     .score-display { 
-        top: 24vh; 
-        font-size: clamp(32px, 9vw, 64px); 
+        top: 26vh; 
+        font-size: clamp(32px, 9vw, 58px); 
     }
     
-    .radar-container { top: 54vh; width: clamp(180px, 50vw, 260px); }
+    /* Корректируем радар на маленьких экранах */
+    .radar-container { 
+        top: 58vh; 
+        width: clamp(200px, 55vw, 280px); 
+    }
+    
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
     .dollar-sign { font-size: 24px; }
 }
