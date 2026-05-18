@@ -55,13 +55,12 @@ const handleSecondaryClick = () => emit('secondaryClick')
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: rgba(35, 35, 35, 0.9); */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 20px;
-    }
+}
 
 .modal-content {
     background-color: #212121;
@@ -75,6 +74,15 @@ const handleSecondaryClick = () => emit('secondaryClick')
     gap: 20px;
     max-height: 80vh;
     overflow-y: auto;
+
+    /* 👇 Скрываем шкалу прокрутки в Firefox, IE и Edge */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+/* 👇 Скрываем шкалу прокрутки в Chrome, Safari и Opera */
+.modal-content::-webkit-scrollbar {
+    display: none;
 }
 
 .modal-header {
@@ -123,7 +131,7 @@ const handleSecondaryClick = () => emit('secondaryClick')
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 1.6;
-    color: #888888;
+    color: #F0F0F0; /* 👈 Сделали текст ярче (был #888888, стал почти белым #F0F0F0) */
     margin: 0;
     white-space: pre-line;
 }
@@ -158,23 +166,22 @@ const handleSecondaryClick = () => emit('secondaryClick')
     opacity: 0.9;
 }
 
+.btn-primary:disabled {
+    background-color: #444444;
+    color: #777777;
+    cursor: not-allowed;
+    transform: none !important;
+    opacity: 0.8;
+}
+
 .btn-secondary {
     background-color: #333333;
     color: #888888;
-    }
+}
 
 .btn-secondary:active {
     transform: scale(0.98);
     opacity: 0.8;
-}
-
-.modal-content::-webkit-scrollbar {
-    width: 4px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background-color: #444;
-    border-radius: 4px;
 }
 
 .modal-enter-active,
@@ -195,13 +202,5 @@ const handleSecondaryClick = () => emit('secondaryClick')
 .modal-enter-from .modal-content,
 .modal-leave-to .modal-content {
     transform: scale(0.95);
-}
-
-.btn-primary:disabled {
-    background-color: #444444; 
-    color: #777777;            
-    cursor: not-allowed;       
-    transform: none !important;
-    opacity: 0.8;
 }
 </style>
