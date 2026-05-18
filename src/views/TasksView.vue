@@ -181,184 +181,55 @@ const handleCheckCompletion = () => {
 </template>
 
 <style scoped>
-/* ... ВЕСЬ ТВОЙ СУЩЕСТВУЮЩИЙ CSS БЕЗ ИЗМЕНЕНИЙ ... */
-
 .map-page {
-    width: 100%;
-    height: 100vh;
-    background:
-        linear-gradient(
-            0deg, 
-            rgb(66, 66, 66, 0),
-            rgb(66, 66, 66, 0.2),
-            rgb(66, 66, 66, 0.4),
-            rgb(66, 66, 66, 0.6),
-            rgb(66, 66, 66, 0.8),
-            rgb(66, 66, 66)
-        ),
-        #212121;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+    width: 100%; height: 100vh;
+    background: linear-gradient(0deg, rgba(66,66,66,0), rgba(66,66,66,0.2), rgba(66,66,66,0.4), rgba(66,66,66,0.6), rgba(66,66,66,0.8), rgb(66,66,66)), #212121;
+    overflow: hidden; display: flex; flex-direction: column; align-items: center; position: relative;
 }
 
 .page-title {
-    position: fixed;
-    top: 3.5vh;
-    left: 15vw;
-    width: 70dvw;
-    font-family: 'Inter', sans-serif;
-    font-weight: 330;
-    color: #ffffff;
-    text-align: center;
-    margin: 0;
-    font-size: clamp(24px, 10vw, 128px); 
-}
-
-.friends-container {
-    position: fixed;
-    top: 35.7vh;
-    left: 2.5%;
-    width: 94%;
-    height: 50vh;
-    background-color: #ff000000;  
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 1.3vh;
-
-    -ms-overflow-style: none; 
-    scrollbar-width: none;  
-}
-
-.friends-container::-webkit-scrollbar {
-    display: none;
-}
-
-.friend-card {
-    flex-shrink: 0;
-    flex-grow: 0;  
-    background-color: rgba(217, 217, 217, 0.4);
-    border-radius: 999px;
-    padding: 20px 20px;
-    display: flex;
-    align-items: center;
-    gap: 5%;
-    height: 11.2vh;
-    transition: transform 0.2s;
-    cursor: pointer;
-}
-
-.friend-card:active {
-    transform: scale(0.98);
-}
-
-.friend-avatar {
-    height: 9.7vh;
-    object-fit: contain;
-    flex-shrink: 0;
-    margin-left: -4%;
-}
-
-.friend-name {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(24px, 5vw, 22px); 
-    color: #FFFFFF;
-    font-weight: 300;
+    position: absolute; top: 3vh; left: 0; width: 100%;
+    font-family: 'Inter', sans-serif; font-weight: 300; color: #ffffff; text-align: center; margin: 0;
+    font-size: clamp(26px, 8vw, 42px); z-index: 10; pointer-events: none;
 }
 
 .invite-banner {
-    position: fixed;
-    top: 12vh;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    width: 92vw;
-    min-height: 15vh;
-    
-    background-color: rgba(255, 218, 122, 0.4);
-
-    border-radius: clamp(16px, 10vw, 50px);
-    padding: 1.4vh 6vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 3.5vh;
-    z-index: 6;
-    box-sizing: border-box;
-    
-    max-height: 24vh;
-    overflow: hidden;
+    position: absolute; top: 11vh; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 400px; background-color: rgba(255, 218, 122, 0.4);
+    border-radius: 24px; padding: 15px 20px; display: flex; align-items: center; justify-content: center;
+    z-index: 6; box-sizing: border-box;
 }
 
-.invite-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-top: 0.5vh;
-    width: 100%;
-}
-
-.invite-icon {
-    width: 23%;
-    flex-shrink: 0; 
-}
-
-.invite-text {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(14px, 4.5vw, 32px);
-    font-weight: 400;
-    color: #ffffff;
-    line-height: 1.3;
-    flex: 1;
-    text-align: center;
-}
+.invite-top-row { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; }
+.invite-icon { width: 50px; flex-shrink: 0; }
+.invite-text { margin: 0; font-family: 'Inter', sans-serif; font-size: clamp(14px, 4vw, 18px); font-weight: 400; color: #ffffff; line-height: 1.3; flex: 1; text-align: center; }
 
 .friends-header {
-    position: fixed;
-    top: 30.5vh;
-    left: 4%;
-    width: 92vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(18px, 7vw, 96px);
-    font-weight: 300;
-    color: #FFFFFF;
-    z-index: 10;
+    position: absolute; top: 27vh; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 400px; display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Inter', sans-serif; font-size: clamp(20px, 6vw, 28px); font-weight: 300; color: #FFFFFF; z-index: 10;
 }
 
-.tasks-counter {
-    font-size: clamp(14px, 4vw, 16px);
-    color: #888888;
-    font-weight: 400;
+.friends-container {
+    position: absolute; top: 33vh; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 400px; height: 50vh; background-color: transparent;
+    overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 12px;
+    padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none;
 }
+.friends-container::-webkit-scrollbar { display: none; }
+
+.friend-card {
+    flex-shrink: 0; background-color: rgba(217, 217, 217, 0.4); border-radius: 999px;
+    padding: 12px 20px; display: flex; align-items: center; gap: 15px; height: 75px; transition: transform 0.2s; cursor: pointer;
+}
+.friend-card:active { transform: scale(0.98); }
+.friend-avatar { height: 50px; width: 50px; object-fit: contain; flex-shrink: 0; }
+.friend-name { font-family: 'Inter', sans-serif; font-size: clamp(16px, 5vw, 20px); color: #FFFFFF; font-weight: 400; }
 
 @media screen and (max-height: 700px) {
-    .page-title {
-        top: 2vh;
-    }
-
-    .invite-banner {
-        top: 8vh; /* Было 12vh */
-        min-height: 12vh;
-        gap: 1vh; /* Уменьшаем отступы внутри баннера */
-    }
-
-    .friends-header {
-        top: 26vh; /* Поднимаем заголовок списка */
-    }
-
-    .friends-container {
-        top: 32vh; /* Поднимаем сам список */
-        height: 55vh; /* Даем списку больше места, чтобы он не обрезался */
-    }
+    .page-title { top: 2vh; }
+    .invite-banner { top: 9vh; padding: 10px 15px; }
+    .friends-header { top: 24vh; }
+    .friends-container { top: 30vh; height: 55vh; }
 }
 </style>

@@ -388,7 +388,6 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     position: relative;
 }
 
-/* 1. ЗАГОЛОВОК: убрали vw, сделали 100% ширины для идеального центрирования */
 .page-title {
     position: absolute;
     top: 3vh;
@@ -399,9 +398,9 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     color: #ffffff;
     text-align: center;
     margin: 0;
-    font-size: clamp(20px, 6vw, 36px); 
+    font-size: clamp(28px, 7vw, 48px); 
     z-index: 10;
-    pointer-events: none; /* Чтобы клики проходили сквозь него, если он налезет на что-то */
+    pointer-events: none;
 }
 
 /* 2. КНОПКА ИНФО: привязали к процентам (%) вместо vw */
@@ -499,12 +498,21 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
 .score-display {
     position: absolute;
-    top: 27vh; 
+    top: 26vh;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Inter', sans-serif; font-weight: 300; 
-    font-size: clamp(36px, 8vw, 64px); 
-    color: #FFFFFF; text-align: center; white-space: nowrap; pointer-events: none; user-select: none; z-index: 10;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    
+    /* Тот самый красивый размер из изначальной версии 👇 */
+    font-size: clamp(32px, 10vw, 128px); 
+    
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
 }
 
 /* 5. РАДАР */
@@ -549,8 +557,13 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     .page-title, .info-button { top: 2vh; }
     .top-bar { top: 10vh; }
     .progress-section { top: 18vh; }
-    .score-display { top: 25vh; }
-
+    
+    .score-display { 
+        top: 24vh; 
+        font-size: clamp(32px, 9vw, 64px); 
+    }
+    
+    .radar-container { top: 54vh; width: clamp(180px, 50vw, 260px); }
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
     .dollar-sign { font-size: 24px; }
 }
