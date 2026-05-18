@@ -27,6 +27,15 @@ const userName = ref('Loading...')
 const userPhoto = ref('')
 const isDisconnectModalOpen = ref(false)
 
+const isInfoModalOpen = ref(false)
+
+const infoText = `
+📡 <b>Исследуйте частоты:</b> кликайте по радару, чтобы сканировать пространство и добывать Radar Points (RP).<br><br>
+⚡ <b>Повышайте уровень:</b> заполняйте шкалу, чтобы открывать новые частоты. Чем выше уровень, тем больше RP приносит каждый ваш клик.<br><br>
+🎁 <b>Бонусы:</b> выполняйте простые задания и зовите друзей, чтобы зарабатывать еще больше.<br><br>
+💰 <b>Обмен на GTR:</b> конвертируйте накопленные RP в ценные токены GTR прямо на главном экране!
+`
+
 const radarFrames = [f0, f1, f2, f3, f4, f5, f6, f7]
 
 const currentFrame = ref(0)
@@ -264,6 +273,21 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 <template>
     <div class="page-container">
         <h1 class="page-title">Global Token Radar</h1>
+
+        <div class="info-button" @click="isInfoModalOpen = true">
+            <span class="info-icon">i</span>
+        </div>
+
+        <InviteModal
+            :isOpen="isInfoModalOpen"
+            title="Как это работает?"
+            :description="infoText"
+            primaryButtonText="Отлично, понятно!"
+            secondaryButtonText="Закрыть"
+            @close="isInfoModalOpen = false"
+            @primaryClick="isInfoModalOpen = false"
+            @secondaryClick="isInfoModalOpen = false"
+        />
         
         <div class="top-bar">
             <div class="user-pill">
@@ -608,5 +632,39 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     font-size: 32px;
     font-weight: 700;
     color: #212121;
+}
+
+.info-button {
+    position: absolute;
+    top: 3.5vh;
+    right: 5vw; 
+    width: clamp(28px, 4vh, 36px);
+    height: clamp(28px, 4vh, 36px);
+    background-color: #212121; 
+    border: 1.5px solid #FFDA7A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.info-button:active {
+    transform: scale(0.9);
+    background-color: #FFDA7A; 
+}
+
+.info-button:active .info-icon {
+    color: #212121; 
+}
+
+.info-icon {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 2vh, 18px);
+    font-weight: 600;
+    color: #FFDA7A;
+    font-style: italic;
 }
 </style>
