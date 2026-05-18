@@ -95,9 +95,9 @@ img {
   max-width: 80%;
 }
 
-@media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+@media screen and (max-width: 1000px) and (max-height: 600px) and (orientation: landscape) {
   .landscape-overlay {
-    display: flex; 
+    display: flex !important;
   }
 }
 </style>
