@@ -44,11 +44,17 @@ const FRAME_TIME = DURATION / 8
 const QUEUE_THRESHOLD = 300 
 
 const handleRadarClick = () => {
-    score.value++
-    progress.value++
+    score.value += currentLevelInfo.value!.rpPerClick;
     
-    if (progress.value >= 500) {
-        progress.value = 0
+    progress.value++;
+    
+    if (progress.value >= currentLevelInfo.value!.clicksNeeded) {
+        if (level.value < 20) { 
+            level.value++;
+            progress.value = 0; 
+        } else {
+            progress.value = currentLevelInfo.value!.clicksNeeded; 
+        }
     }
     
     if (!isAnimating.value) {
@@ -57,7 +63,7 @@ const handleRadarClick = () => {
         const elapsed = Date.now() - animationStart
         const remaining = DURATION - elapsed
         if (remaining <= QUEUE_THRESHOLD) {
-        extraCycles.value = 1;
+            extraCycles.value = 1;
         }
     }
 }
@@ -171,8 +177,36 @@ watch(score, (newVal) => {
 
 const level = ref(1)
 const progress = ref(0)
+
+const levelsConfig = [
+    { level: 1, clicksNeeded: 500, rpPerClick: 1 },
+    { level: 2, clicksNeeded: 1000, rpPerClick: 2 },
+    { level: 3, clicksNeeded: 2000, rpPerClick: 3 },
+    { level: 4, clicksNeeded: 3500, rpPerClick: 4 },
+    { level: 5, clicksNeeded: 5000, rpPerClick: 5 },
+    { level: 6, clicksNeeded: 7000, rpPerClick: 6 },
+    { level: 7, clicksNeeded: 10000, rpPerClick: 7 },
+    { level: 8, clicksNeeded: 15000, rpPerClick: 8 },
+    { level: 9, clicksNeeded: 20000, rpPerClick: 9 },
+    { level: 10, clicksNeeded: 30000, rpPerClick: 10 },
+    { level: 11, clicksNeeded: 45000, rpPerClick: 12 },
+    { level: 12, clicksNeeded: 60000, rpPerClick: 14 },
+    { level: 13, clicksNeeded: 80000, rpPerClick: 16 },
+    { level: 14, clicksNeeded: 100000, rpPerClick: 18 },
+    { level: 15, clicksNeeded: 150000, rpPerClick: 20 },
+    { level: 16, clicksNeeded: 200000, rpPerClick: 25 },
+    { level: 17, clicksNeeded: 300000, rpPerClick: 30 },
+    { level: 18, clicksNeeded: 500000, rpPerClick: 35 },
+    { level: 19, clicksNeeded: 750000, rpPerClick: 40 },
+    { level: 20, clicksNeeded: 1000000, rpPerClick: 50 } // Максимальный уровень
+]
+
+const currentLevelInfo = computed(() => {
+    return levelsConfig.find(c => c.level === level.value) || levelsConfig[levelsConfig.length - 1]
+})
+
 const progressPercent = computed(() => {
-  return Math.min((progress.value / 500) * 100, 100)
+    return Math.min((progress.value / currentLevelInfo.value!.clicksNeeded) * 100, 100)
 })
 
 onMounted(() => {
@@ -222,8 +256,8 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
         <div class="progress-section">
             <div class="progress-info">
-                <span class="progress-text">{{ score % 500 }}/500</span>
-                <span class="level-text">{{ level }}</span>
+                <span class="progress-text">{{ progress }}/{{ currentLevelInfo!.clicksNeeded }}</span>
+                <span class="level-text">Частоты {{ level }}</span>
             </div>
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" :style="{ width: progressPercent + '%' }"></div>
@@ -231,8 +265,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
         </div>
 
         <div class="score-display">
-            {{ score }} GTR
-        </div>
+            {{ score }} RP </div>
 
         <div class="radar-container" @click="handleRadarClick">
             <img :src="radarBg" class="radar-layer-bg" alt="" />

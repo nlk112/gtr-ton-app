@@ -57,7 +57,7 @@ const friends = ref<Task[]>([
 ])
 
 const isTaskModalOpen = ref(false)
-// 3. Теперь храним весь объект задания, а не только имя
+
 const selectedTask = ref<Task | null>(null)
 
 const openTaskModal = (task: Task) => {
