@@ -1,4 +1,4 @@
-import { Ref } from "vue";
+import { ref } from 'vue'
 
 const savedLang = localStorage.getItem('gtr_lang') || "en"
 export const currentLang = ref(savedLang)
