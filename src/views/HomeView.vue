@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/locales'
 
 import LanguageModal from '@/components/LanguageModal.vue'
 import { currentLang } from '@/locales'
@@ -33,13 +34,6 @@ const userPhoto = ref('')
 const isDisconnectModalOpen = ref(false)
 
 const isInfoModalOpen = ref(false)
-
-const infoText = `
-📡 <b>Исследуйте частоты:</b> кликайте по радару, чтобы сканировать пространство и добывать Radar Points (RP).<br><br>
-⚡ <b>Повышайте уровень:</b> заполняйте шкалу, чтобы открывать новые частоты. Чем выше уровень, тем больше RP приносит каждый ваш клик.<br><br>
-🎁 <b>Бонусы:</b> выполняйте простые задания и зовите друзей, чтобы зарабатывать еще больше.<br><br>
-💰 <b>Обмен на GTR:</b> конвертируйте накопленные RP в ценные токены GTR прямо на главном экране!
-`
 
 const radarFrames = [f0, f1, f2, f3, f4, f5, f6, f7]
 
@@ -271,11 +265,20 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     localStorage.setItem('gtr_progress', newProgress.toString())
     localStorage.setItem('gtr_level', newLevel.toString())
 })
+
+const exchangeModalDescription = computed(() => {
+    return `${t('exchangeModal.balance')} <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${score.value} RP</span><br>` +
+        `${t('exchangeModal.currentAccount')} <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${gtrBalance.value} GTR</span><br><br>` +
+        `${t('exchangeModal.available')}<br><b>${maxExchangeableRP.value} RP ➔ +${possibleGtrGained.value} GTR</b><br><br>` +
+        `<span style='color: #888888; font-size: 12px;'>${t('exchangeModal.rate')}</span>`
+})
+
+const infoText = computed(() => t('infoModal.text'))
 </script>
 
 <template>
     <div class="page-container">
-        <h1 class="page-title">Global Token Radar</h1>
+        <h1 class="page-title">{{ t('home.title') }}</h1>
 
         <div class="info-button" @click="isInfoModalOpen = true">
             <span class="info-icon">i</span>
@@ -283,10 +286,10 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
         <InviteModal
             :isOpen="isInfoModalOpen"
-            title="Как это работает?"
+            :title="t('infoModal.title')"
             :description="infoText"
-            primaryButtonText="Отлично, понятно!"
-            secondaryButtonText="Закрыть"
+            :primaryButtonText="t('infoModal.btnOk')"
+            :secondaryButtonText="t('infoModal.btnClose')"
             @close="isInfoModalOpen = false"
             @primaryClick="isInfoModalOpen = false"
             @secondaryClick="isInfoModalOpen = false"
@@ -319,7 +322,7 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
         <div class="progress-section">
             <div class="progress-info">
                 <span class="progress-text">{{ progress }}/{{ currentLevelInfo!.clicksNeeded }}</span>
-                <span class="level-text">Частоты {{ level }}</span>
+                <span class="level-text">{{ t('home.leveltext') }} {{ level }}</span>
             </div>
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" :style="{ width: progressPercent + '%' }"></div>
@@ -338,10 +341,10 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
         <InviteModal
             :isOpen="isDisconnectModalOpen"
-            title="Отключить кошелек"
-            description="Вы уверены, что хотите отключить свой TON кошелек?"
-            primaryButtonText="Отмена"
-            secondaryButtonText="Отключить"
+            title="t('home.inviteModaltitle')"
+            description="t('home.inviteModaldescription')"
+            primaryButtonText="t('home.inviteModalPrimaryButtonText')"
+            secondaryButtonText="t('home.inviteModalSecondaryButtonText')"
             @close="closeDisconnectModal"
             @primaryClick="closeDisconnectModal"
             @secondaryClick="confirmDisconnect"
@@ -362,15 +365,13 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 
         <InviteModal
             :isOpen="isExchangeModalOpen"
-            title="Обмен валюты"
+            :title="t('exchangeModal.title')"
             
-            :description="`Ваш баланс: <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${score} RP</span><br>Текущий счет: <span style='color: #FFDA7A; font-size: 16px; font-weight: 600;'>${gtrBalance} GTR</span><br><br>Доступно к обмену:<br><b>${maxExchangeableRP} RP ➔ +${possibleGtrGained} GTR</b><br><br><span style='color: #888888; font-size: 12px;'>Курс: 1000 RP = 1 GTR</span>`"
+            :description="exchangeModalDescription"
             
-            :primaryButtonText="possibleGtrGained > 0 ? `Обменять ${maxExchangeableRP} RP` : 'Нечего обменивать'"
-            secondaryButtonText="Отмена"
-            
+            :primaryButtonText="possibleGtrGained > 0 ? `${t('exchangeModal.btnExchange')} ${maxExchangeableRP} RP` : t('exchangeModal.btnNothing')"
+            :secondaryButtonText="t('exchangeModal.btnCancel')"
             :is-primary-disabled="possibleGtrGained === 0"
-            
             @close="isExchangeModalOpen = false"
             @primaryClick="handleExchangeRP"
             @secondaryClick="isExchangeModalOpen = false"

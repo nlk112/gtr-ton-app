@@ -9,7 +9,6 @@ const emit = defineEmits(['close'])
 
 const handleSelect = (key: string) => {
     setLanguage(key)
-    emit('close')
 }
 </script>
 
