@@ -40,7 +40,9 @@ const handleInviteSecondaryClick = () => {
 
 <template>
     <div class="map-page">
-        <h1 class="page-title">{{ t('friends.title') }}</h1>
+        <h1 class="page-title" :style="{ fontSize: t('tasks.titleSize') }">
+            {{ t('friends.title') }}
+        </h1>
 
         <div class="invite-banner">
             <div class="invite-top-row">
@@ -112,7 +114,7 @@ const handleInviteSecondaryClick = () => {
     color: #ffffff;
     text-align: center;
     margin: 0;
-    font-size: clamp(20px, 10vw, 128px); 
+    font-size: clamp(24px, 10vw, 128px); 
 }
 
 .friends-header {
