@@ -1,5 +1,10 @@
 <script setup lang="ts">
 
+import LanguageModal from '@/components/LanguageModal.vue'
+import { currentLang } from '@/locales'
+
+const isLangModalOpen = ref(false)
+
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
 
@@ -346,6 +351,15 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
             <span class="dollar-sign">$</span>
         </div>
 
+        <div class="lang-button" @click="isLangModalOpen = true">
+            <span class="lang-text">{{ currentLang.toUpperCase() }}</span>
+        </div>
+
+        <LanguageModal 
+            :is-open="isLangModalOpen" 
+            @close="isLangModalOpen = false" 
+        />
+
         <InviteModal
             :isOpen="isExchangeModalOpen"
             title="Обмен валюты"
@@ -550,6 +564,21 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
 .exchange-button:active { transform: scale(0.9); }
 .dollar-sign { font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: #212121; }
 
+.lang-button {
+    position: absolute;
+    left: 20px; /* 👈 Прижата к левому краю */
+    bottom: 14vh; 
+    width: clamp(45px, 12vw, 65px);
+    height: clamp(45px, 12vw, 65px);
+    background-color: #FFDA7A;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); z-index: 20; transition: transform 0.2s;
+}
+
+.lang-button:active { transform: scale(0.9); }
+.lang-text { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 700; color: #212121; }
+
 /* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ --- */
 @media screen and (max-height: 700px) {
     .page-title, .info-button { top: 2vh; }
@@ -570,5 +599,10 @@ watch([score, progress, level], ([newScore, newProgress, newLevel]) => {
     
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
     .dollar-sign { font-size: 24px; }
+
+    .exchange-button { bottom: 12vh; width: 45px; height: 45px; right: 16px; }
+    .lang-button { bottom: 12vh; width: 45px; height: 45px; left: 16px; }
+    .dollar-sign { font-size: 24px; }
+    .lang-text { font-size: 16px; }
 }
 </style>
