@@ -34,7 +34,7 @@ export const locales: Record<string, any> = {
         },
         tasks: {
             title: 'Бонусные награды',
-            titleSize: 'clamp(20px, 8vw, 38px)',
+            titleSize: 'clamp(24px, 10vw, 128px)',
             banner: 'Выполняйте простые задания, чтобы получить бонус',
             listHeader: 'Задания',
             modalBtnGo: 'Перейти к заданию',

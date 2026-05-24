@@ -108,7 +108,7 @@ const handleInviteSecondaryClick = () => {
     position: fixed;
     top: 3.5vh;
     left: 15vw;
-    width: 70dvw;
+    width: 90dvw;
     font-family: 'Inter', sans-serif;
     font-weight: 330;
     color: #ffffff;
