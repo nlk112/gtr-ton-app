@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
+// 👇 1. Обязательно импортируем нашу функцию перевода
+import { t } from '@/locales'
 
 import avatar0 from '@/assets/avatar_0.svg'
 
@@ -38,15 +40,15 @@ const handleInviteSecondaryClick = () => {
 
 <template>
     <div class="map-page">
-        <h1 class="page-title">Friend List</h1>
+        <h1 class="page-title">{{ t('friends.title') }}</h1>
 
         <div class="invite-banner">
             <div class="invite-top-row">
-                <p class="invite-text">Пригласите друзей и зарабатывайте бесплатные токены</p>
+                <p class="invite-text">{{ t('friends.inviteBanner') }}</p>
                 <img src="@/assets/arrow.svg" class="invite-icon" alt="arrow" />
             </div>
             <button class="invite-details" @click="openInviteModal">
-                <span>Подробности</span>
+                <span>{{ t('friends.details') }}</span>
                 <div class="invite-chevron">
                     <img src="@/assets/chevron_down.svg" alt="" />
                 </div>
@@ -54,10 +56,10 @@ const handleInviteSecondaryClick = () => {
 
             <InviteModal
                 :is-open="isInviteModalOpen"
-                title="Подробности"
-                description="Приглашайте друзей и получайте бонусы"
-                primary-button-text="Пригласить друга"
-                secondary-button-text="Закрыть"
+                :title="t('friends.details')"
+                :description="t('friends.modalDesc')"
+                :primary-button-text="t('friends.btnInvite')"
+                :secondary-button-text="t('friends.btnClose')"
                 @close="closeInviteModal"
                 @primary-click="handleInvitePrimaryClick"
                 @secondary-click="handleInviteSecondaryClick"
@@ -65,7 +67,7 @@ const handleInviteSecondaryClick = () => {
         </div>
         
         <div class="friends-header">
-            Your friends({{ friends.length }})
+            {{ t('friends.yourFriends') }} ({{ friends.length }})
         </div>
 
         <div class="friends-container">
@@ -74,7 +76,6 @@ const handleInviteSecondaryClick = () => {
                 <span class="friend-name">{{ friend.name }}</span>
             </div>
         </div>
-        <!-- Заглушка, потом здесь будет карта -->
         <BottomNav />
     </div>
 </template>

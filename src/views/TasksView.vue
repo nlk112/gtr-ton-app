@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+// 👇 Добавили computed
+import { ref, computed } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
+// 👇 Импортируем функцию перевода
+import { t } from '@/locales'
 
 import { TonConnectUI } from '@tonconnect/ui'
 
 const tonConnectUI = new TonConnectUI({
-    manifestUrl: 'https://ТВОЯ-ССЫЛКА-НА-VERCEL.vercel.app/tonconnect-manifest.json' // 👈 Укажи свой домен!
+    manifestUrl: 'https://gtr-ton-app.vercel.app/tonconnect-manifest.json'
 });
 
 import icox from '@/assets/iconx.svg'
@@ -24,40 +27,40 @@ interface Task {
     address?: string;
 }
 
-const friends = ref<Task[]>([
+// 👇 Превратили массив в computed, чтобы он автоматически переводился
+const friends = computed<Task[]>(() => [
     { 
         id: 1, 
-        name: 'Верификация кошелька', 
+        name: t('tasks.items.verificationName'), 
         avatar: iconton, 
-        description: 'Для подтверждения активности аккаунта совершите тестовый перевод 0.5 TON на указанный адрес.',
+        description: t('tasks.items.verificationDesc'),
         link: 'verification', 
         address: 'UQCk6aQqhFNLfatGk3fCKkB79IB0yeiSZg9yfBvtETARiGA6',
         reward: 2
     },
     { 
         id: 2, 
-        name: 'Подписаться на X', 
+        name: t('tasks.items.xName'), 
         avatar: icox, 
-        description: 'Подпишитесь на наш официальный аккаунт в X (Twitter), чтобы первыми узнавать все новости проекта.',
+        description: t('tasks.items.xDesc'),
         link: 'https://x.com/gtfrtoken',
         reward: 1
     },
     { 
         id: 3, 
-        name: 'Подписаться на Telegram', 
+        name: t('tasks.items.tgName'), 
         avatar: icontg, 
-        description: 'Вступайте в наше официальное сообщество в Telegram. Там мы проводим розыгрыши и общаемся.',
+        description: t('tasks.items.tgDesc'),
         link: 'https://t.me/GTRTon',
         reward: 1
     },
-    { id: 4, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 5, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 6, name: 'Ожидает текста', avatar: icox, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
-    { id: 7, name: 'Ожидает текста', avatar: iconds, description: 'Скоро здесь появится новое задание', link: '', reward: 0 },
+    { id: 4, name: t('tasks.items.waitName'), avatar: iconds, description: t('tasks.items.waitDesc'), link: '', reward: 0 },
+    { id: 5, name: t('tasks.items.waitName'), avatar: iconds, description: t('tasks.items.waitDesc'), link: '', reward: 0 },
+    { id: 6, name: t('tasks.items.waitName'), avatar: icox, description: t('tasks.items.waitDesc'), link: '', reward: 0 },
+    { id: 7, name: t('tasks.items.waitName'), avatar: iconds, description: t('tasks.items.waitDesc'), link: '', reward: 0 },
 ])
 
 const isTaskModalOpen = ref(false)
-
 const selectedTask = ref<Task | null>(null)
 
 const openTaskModal = (task: Task) => {
@@ -70,18 +73,19 @@ const closeTaskModal = () => {
     setTimeout(() => selectedTask.value = null, 300) 
 }
 
-// 4. Функция для открытия ссылки из задания
 const handleGoToLink = async () => {
     if (!selectedTask.value?.link) return;
 
     if (selectedTask.value.link === 'verification') {
         if (!tonConnectUI?.connected) {
-            alert('Сначала подключите кошелек на главной странице!');
+            // 👇 Перевели алерт
+            alert(t('tasks.alerts.connectWallet'));
             return;
         }
 
         if (!selectedTask.value.address) {
-            alert('Адрес кошелька для верификации не настроен.');
+            // 👇 Перевели алерт
+            alert(t('tasks.alerts.noAddress'));
             return;
         }
 
@@ -98,10 +102,10 @@ const handleGoToLink = async () => {
 
             await tonConnectUI.sendTransaction(transaction);
             
-            alert('Транзакция отправлена в сеть! Нажмите "Проверить" через минуту.');
+            // 👇 Перевели алерт
+            alert(t('tasks.alerts.txSent'));
             
         } catch (e) {
-            // Если пользователь нажал "Отмена" внутри кошелька
             console.error('Пользователь отменил транзакцию или произошла ошибка:', e);
         }
         return;
@@ -124,25 +128,23 @@ const handleGoToLink = async () => {
 
 const handleCheckCompletion = () => {
     console.log(`Проверка выполнения задания: ${selectedTask.value?.name}. Награда: ${selectedTask.value?.reward}`)
-    // Тут в будущем будет запрос к бэкенду на проверку подписки
     closeTaskModal()
 }
 </script>
 
 <template>
     <div class="map-page">
-        <h1 class="page-title">Bonus rewards</h1>
+        <h1 class="page-title">{{ t('tasks.title') }}</h1>
 
         <div class="invite-banner">
             <div class="invite-top-row">
                 <img src="@/assets/coins.svg" class="invite-icon" alt="bonus" />
-                <p class="invite-text">Выполняйте простые задания, чтобы получить бонус</p>               
+                <p class="invite-text">{{ t('tasks.banner') }}</p>              
             </div>
         </div>
         
         <div class="friends-header">
-            Tasks
-            <!-- <span class="tasks-counter">10/12</span> -->
+            {{ t('tasks.listHeader') }}
         </div>
 
         <div class="friends-container">
@@ -163,11 +165,11 @@ const handleCheckCompletion = () => {
             :title="selectedTask.name"
             
             :description="selectedTask.reward > 0 
-                ? `${selectedTask.description}<br><br><span style='color: #FFDA7A; font-weight: 600; font-size: 16px;'>🎁 Награда: +${selectedTask.reward} GTR</span>`
-                : `${selectedTask.description}<br><br><span style='color: #888888; font-weight: 500; font-size: 16px;'>🎁 Награда: Скоро</span>`"
+                ? `${selectedTask.description}<br><br><span style='color: #FFDA7A; font-weight: 600; font-size: 16px;'>${t('tasks.rewardAmount')}${selectedTask.reward} GTR</span>`
+                : `${selectedTask.description}<br><br><span style='color: #888888; font-weight: 500; font-size: 16px;'>${t('tasks.rewardSoon')}</span>`"
             
-            primary-button-text="Перейти к заданию"
-            secondary-button-text="Проверить"
+            :primary-button-text="t('tasks.modalBtnGo')"
+            :secondary-button-text="t('tasks.modalBtnCheck')"
             
             :is-primary-disabled="selectedTask.reward === 0" 
             
