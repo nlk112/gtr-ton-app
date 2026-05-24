@@ -40,7 +40,7 @@ const handleInviteSecondaryClick = () => {
 
 <template>
     <div class="map-page">
-        <h1 class="page-title" :style="{ fontSize: t('tasks.titleSize') }">
+        <h1 class="page-title">
             {{ t('friends.title') }}
         </h1>
 
@@ -107,7 +107,7 @@ const handleInviteSecondaryClick = () => {
 .page-title {
     position: fixed;
     top: 3.5vh;
-    left: 15vw;
+    left: 5vw;
     width: 90dvw;
     font-family: 'Inter', sans-serif;
     font-weight: 330;
