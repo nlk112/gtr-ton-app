@@ -216,7 +216,7 @@ const handleCheckCompletion = () => {
     color: #ffffff;
     text-align: center;
     margin: 0;
-    font-size: clamp(24px, 9vw, 128px); 
+    font-size: clamp(20px, 10vw, 128px); 
 }
 
 .friends-container {
