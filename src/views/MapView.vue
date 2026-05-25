@@ -2,19 +2,19 @@
 import { ref } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
-// 👇 1. Обязательно импортируем нашу функцию перевода
+
 import { t } from '@/locales'
 
 import avatar0 from '@/assets/avatar_0.svg'
 
 const friends = ref([
-    { id: 1, name: 'Имя', avatar: avatar0 },
-    { id: 2, name: 'Имя', avatar: avatar0 },
-    { id: 3, name: 'Имя', avatar: avatar0 },
-    { id: 4, name: 'Имя', avatar: avatar0 },
-    { id: 5, name: 'Имя', avatar: avatar0 },
-    { id: 6, name: 'Имя', avatar: avatar0 },
-    { id: 7, name: 'Имя', avatar: avatar0 },
+    { id: 1, name: 'Имя1', avatar: avatar0 },
+    { id: 2, name: 'Имя2', avatar: avatar0 },
+    { id: 3, name: 'Имя3', avatar: avatar0 },
+    { id: 4, name: 'Имя4', avatar: avatar0 },
+    { id: 5, name: 'Имя5', avatar: avatar0 },
+    { id: 6, name: 'Имя6', avatar: avatar0 },
+    { id: 7, name: 'Имя7', avatar: avatar0 },
 ])
 
 const isInviteModalOpen = ref(false)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { locales, currentLang, setLanguage } from '@/locales'
+import { locales, currentLang, setLanguage, t } from '@/locales'
 
 defineProps<{
     isOpen: boolean
@@ -17,7 +17,7 @@ const handleSelect = (key: string) => {
         <div v-if="isOpen" class="modal-overlay" @click.self="emit('close')">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Выберите язык / Language</h3>
+                    <h3 class="modal-title">Language select</h3>
                 </div>
 
                 <div class="modal-body">
@@ -35,7 +35,7 @@ const handleSelect = (key: string) => {
                 </div>
 
                 <div class="modal-actions">
-                    <button class="btn-secondary" @click="emit('close')">Закрыть</button>
+                    <button class="btn-secondary" @click="emit('close')">{{ t('infoModal.btnClose') }}</button>
                 </div>
             </div>
         </div>

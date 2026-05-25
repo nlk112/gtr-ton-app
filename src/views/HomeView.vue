@@ -341,10 +341,10 @@ const infoText = computed(() => t('infoModal.text'))
 
         <InviteModal
             :isOpen="isDisconnectModalOpen"
-            title="t('home.inviteModaltitle')"
-            description="t('home.inviteModaldescription')"
-            primaryButtonText="t('home.inviteModalPrimaryButtonText')"
-            secondaryButtonText="t('home.inviteModalSecondaryButtonText')"
+            :title="t('home.inviteModaltitle')"
+            :description="t('home.inviteModaldescription')"
+            :primaryButtonText="t('home.inviteModalPrimaryButtonText')"
+            :secondaryButtonText="t('home.inviteModalSecondaryButtonText')"
             @close="closeDisconnectModal"
             @primaryClick="closeDisconnectModal"
             @secondaryClick="confirmDisconnect"
@@ -364,16 +364,15 @@ const infoText = computed(() => t('infoModal.text'))
         />
 
         <InviteModal
-            :isOpen="isDisconnectModalOpen"
-            
-            :title="t('home.inviteModaltitle')"
-            :description="t('home.inviteModaldescription')"
-            :primaryButtonText="t('home.inviteModalPrimaryButtonText')"
-            :secondaryButtonText="t('home.inviteModalSecondaryButtonText')"
-            
-            @close="closeDisconnectModal"
-            @primaryClick="closeDisconnectModal"
-            @secondaryClick="confirmDisconnect"
+            :isOpen="isExchangeModalOpen"
+            :title="t('exchangeModal.title')"
+            :description="exchangeModalDescription"
+            :primaryButtonText="possibleGtrGained > 0 ? `${t('exchangeModal.btnExchange')} ${maxExchangeableRP} RP` : t('exchangeModal.btnNothing')"
+            :secondaryButtonText="t('exchangeModal.btnCancel')"
+            :is-primary-disabled="possibleGtrGained === 0"
+            @close="isExchangeModalOpen = false"
+            @primaryClick="handleExchangeRP"
+            @secondaryClick="isExchangeModalOpen = false"
         />
 
         <BottomNav />
