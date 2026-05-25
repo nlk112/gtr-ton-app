@@ -364,17 +364,16 @@ const infoText = computed(() => t('infoModal.text'))
         />
 
         <InviteModal
-            :isOpen="isExchangeModalOpen"
-            :title="t('exchangeModal.title')"
+            :isOpen="isDisconnectModalOpen"
             
-            :description="exchangeModalDescription"
+            :title="t('home.inviteModaltitle')"
+            :description="t('home.inviteModaldescription')"
+            :primaryButtonText="t('home.inviteModalPrimaryButtonText')"
+            :secondaryButtonText="t('home.inviteModalSecondaryButtonText')"
             
-            :primaryButtonText="possibleGtrGained > 0 ? `${t('exchangeModal.btnExchange')} ${maxExchangeableRP} RP` : t('exchangeModal.btnNothing')"
-            :secondaryButtonText="t('exchangeModal.btnCancel')"
-            :is-primary-disabled="possibleGtrGained === 0"
-            @close="isExchangeModalOpen = false"
-            @primaryClick="handleExchangeRP"
-            @secondaryClick="isExchangeModalOpen = false"
+            @close="closeDisconnectModal"
+            @primaryClick="closeDisconnectModal"
+            @secondaryClick="confirmDisconnect"
         />
 
         <BottomNav />
