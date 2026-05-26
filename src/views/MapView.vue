@@ -292,13 +292,13 @@ const handleInviteSecondaryClick = () => {
 
     /* 👇 ДЕЛАЕМ ТЕКСТ ПЛОТНЕЕ 👇 */
     .invite-text {
-        font-size: 13px; /* Фиксируем небольшой размер */
+        /* font-size: 13px;  */
         line-height: 1.2; /* Делаем межстрочный интервал меньше */
     }
 
     /* 👇 ПОДЖИМАЕМ КНОПКУ 👇 */
     .invite-details {
-        font-size: 13px; 
+        /* font-size: 13px;  */
         margin-top: 4px; /* Приближаем кнопку к тексту */
     }
 
@@ -308,12 +308,12 @@ const handleInviteSecondaryClick = () => {
     }
 
     .friends-header { 
-        font-size: clamp(18px, 5vw, 24px); 
+        /* font-size: clamp(18px, 5vw, 24px);  */
         margin-top: 1.5vh; 
     }
 
     .friends-container { 
-        top: 38vh; 
+        top: 0vh; 
         height: 50vh; 
     }
 }
