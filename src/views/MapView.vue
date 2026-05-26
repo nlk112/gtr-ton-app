@@ -44,39 +44,43 @@ const handleInviteSecondaryClick = () => {
             {{ t('friends.title') }}
         </h1>
 
-        <div class="invite-banner">
-            <div class="invite-top-row">
-                <p class="invite-text">{{ t('friends.inviteBanner') }}</p>
-                <img src="@/assets/arrow.svg" class="invite-icon" alt="arrow" />
-            </div>
-            <button class="invite-details" @click="openInviteModal">
-                <span>{{ t('friends.details') }}</span>
-                <div class="invite-chevron">
-                    <img src="@/assets/chevron_down.svg" alt="" />
+        <div class="main-content">
+            
+            <div class="invite-banner">
+                <div class="invite-top-row">
+                    <p class="invite-text">{{ t('friends.inviteBanner') }}</p>
+                    <img src="@/assets/arrow.svg" class="invite-icon" alt="arrow" />
                 </div>
-            </button>
+                <button class="invite-details" @click="openInviteModal">
+                    <span>{{ t('friends.details') }}</span>
+                    <div class="invite-chevron">
+                        <img src="@/assets/chevron_down.svg" alt="" />
+                    </div>
+                </button>
 
-            <InviteModal
-                :is-open="isInviteModalOpen"
-                :title="t('friends.details')"
-                :description="t('friends.modalDesc')"
-                :primary-button-text="t('friends.btnInvite')"
-                :secondary-button-text="t('friends.btnClose')"
-                @close="closeInviteModal"
-                @primary-click="handleInvitePrimaryClick"
-                @secondary-click="handleInviteSecondaryClick"
-            />
-        </div>
-        
-        <div class="friends-header">
-            {{ t('friends.yourFriends') }} ({{ friends.length }})
-        </div>
-
-        <div class="friends-container">
-            <div v-for="friend in friends" :key="friend.id" class="friend-card">
-                <img :src="friend.avatar" class="friend-avatar" alt="avatar" />
-                <span class="friend-name">{{ friend.name }}</span>
+                <InviteModal
+                    :is-open="isInviteModalOpen"
+                    :title="t('friends.details')"
+                    :description="t('friends.modalDesc')"
+                    :primary-button-text="t('friends.btnInvite')"
+                    :secondary-button-text="t('friends.btnClose')"
+                    @close="closeInviteModal"
+                    @primary-click="handleInvitePrimaryClick"
+                    @secondary-click="handleInviteSecondaryClick"
+                />
             </div>
+            
+            <div class="friends-header">
+                {{ t('friends.yourFriends') }} ({{ friends.length }})
+            </div>
+
+            <div class="friends-container">
+                <div v-for="friend in friends" :key="friend.id" class="friend-card">
+                    <img :src="friend.avatar" class="friend-avatar" alt="avatar" />
+                    <span class="friend-name">{{ friend.name }}</span>
+                </div>
+            </div>
+
         </div>
         <BottomNav />
     </div>
