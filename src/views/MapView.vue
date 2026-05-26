@@ -276,25 +276,45 @@ const handleInviteSecondaryClick = () => {
         top: 2vh; 
     }
 
-    /* Поднимаем всю обертку выше */
     .main-content {
         top: 10vh;
         height: 78vh;
     }
 
+    /* 👇 ОБНОВЛЕННЫЙ БАННЕР 👇 */
     .invite-banner { 
-        max-height: 19vh;
-        padding: 12px 15px; 
-        gap: 8px; 
+        padding: 12px 15px 16px 15px; /* Чуть больше отступа снизу (16px), чтобы кнопка не прилипала */
+        gap: 4px; /* Максимально сжимаем расстояние между текстом и кнопкой */
+        min-height: auto; 
+        max-height: none; /* 👈 Убираем жесткое ограничение высоты! */
+        overflow: visible; /* Разрешаем контенту дышать */
     }
 
+    /* 👇 ДЕЛАЕМ ТЕКСТ ПЛОТНЕЕ 👇 */
     .invite-text {
-        font-size: clamp(13px, 4.5vw, 32px);
+        font-size: 13px; /* Фиксируем небольшой размер */
+        line-height: 1.2; /* Делаем межстрочный интервал меньше */
+    }
+
+    /* 👇 ПОДЖИМАЕМ КНОПКУ 👇 */
+    .invite-details {
+        font-size: 13px; 
+        margin-top: 4px; /* Приближаем кнопку к тексту */
+    }
+
+    /* Чуть уменьшаем саму стрелочку, чтобы сэкономить высоту */
+    .invite-chevron {
+        width: 20px; 
     }
 
     .friends-header { 
         font-size: clamp(18px, 5vw, 24px); 
-        margin-top: 1.5vh; /* Чуть уменьшаем отступ */
+        margin-top: 1.5vh; 
+    }
+
+    .friends-container { 
+        top: 38vh; 
+        height: 50vh; 
     }
 }
 </style>
