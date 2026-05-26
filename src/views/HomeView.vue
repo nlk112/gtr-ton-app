@@ -595,7 +595,7 @@ const infoText = computed(() => t('infoModal.text'))
     /* Корректируем радар на маленьких экранах */
     .radar-container { 
         top: 59vh; 
-        width: clamp(200px, 66vw, 390px); 
+        width: clamp(200px, 57vw, 390px); 
     }
     
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
