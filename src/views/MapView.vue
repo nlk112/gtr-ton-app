@@ -272,7 +272,7 @@ const handleInviteSecondaryClick = () => {
     /* Опускаем баннер ниже и делаем его компактнее внутри */
     .invite-banner { 
         top: 10vh; /* Опустили ниже */
-        min-height: 15vh;
+        max-height: 19vh;
         padding: 12px 15px; 
         gap: 8px; /* Уменьшили дырки между элементами */
     }
