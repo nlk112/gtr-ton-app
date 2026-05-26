@@ -581,8 +581,8 @@ const infoText = computed(() => t('infoModal.text'))
 /* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ --- */
 @media screen and (max-height: 700px) {
     .page-title { top: 2vh; }
-    .info-button { right: 2%; }
-    .info-button { top: 1vh; }
+    .info-button { right: 1%; }
+    .info-button { top: 0.6vh; }
     .top-bar { top: 10vh; }
     .progress-section { top: 18vh; }
     
@@ -595,7 +595,7 @@ const infoText = computed(() => t('infoModal.text'))
     /* Корректируем радар на маленьких экранах */
     .radar-container { 
         top: 59vh; 
-        width: clamp(200px, 55vw, 280px); 
+        width: clamp(200px, 66vw, 390px); 
     }
     
     .exchange-button { bottom: 12vh; width: 45px; height: 45px; }
