@@ -118,29 +118,29 @@ const handleInviteSecondaryClick = () => {
 }
 
 .friends-header {
-    position: fixed;
-    top: 37.5vh;
-    left: 4%;
+    position: relative;
+    width: 92vw;
+    margin-top: 2.5vh; /* 👈 Вот он, динамический отступ от баннера! */
+    text-align: left;
     font-family: 'Inter', sans-serif;
     font-size: clamp(18px, 7vw, 96px);
     font-weight: 300;
     color: #FFFFFF;
     z-index: 10;
+    flex-shrink: 0;
 }
 
 .friends-container {
-    position: fixed;
-    top: 42.7vh;
-    left: 3%;
-    width: 94%;
-    height: 50vh;
+    position: relative;
+    width: 94vw;
+    flex: 1; 
+    margin-top: 1.5vh;
     background-color: #ff000000;  
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 1.3vh;
-
     -ms-overflow-style: none; 
     scrollbar-width: none;  
 }
@@ -181,16 +181,10 @@ const handleInviteSecondaryClick = () => {
 }
 
 .invite-banner {
-    position: fixed;
-    top: 12vh;
-    left: 50%;
-    transform: translateX(-50%);
-    
+    position: relative;
     width: 92vw;
-    min-height: 20vh; /* ← Замени height на min-height */
-    
+    min-height: 20vh;
     background-color: rgba(255, 218, 122, 0.4);
-
     border-radius: clamp(16px, 10vw, 50px);
     padding: 1.4vh 6vw;
     display: flex;
@@ -198,10 +192,9 @@ const handleInviteSecondaryClick = () => {
     gap: 3.5vh;
     z-index: 6;
     box-sizing: border-box;
-    
-    /* Опционально: ограничь максимальную высоту */
     max-height: 24vh;
-    overflow: hidden; /* Обрезает контент, если слишком много текста */
+    overflow: hidden;
+    flex-shrink: 0; /* Запрещаем баннеру сплющиваться */
 }
 
 .invite-top-row {
@@ -263,35 +256,41 @@ const handleInviteSecondaryClick = () => {
     object-fit: contain;
 }
 
+.main-content {
+    position: fixed;
+    top: 12vh;
+    width: 100%;
+    height: 75vh; /* Ограничиваем высоту, чтобы список не залезал под BottomNav */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+}
+
 @media screen and (max-height: 700px) {
-    /* Чуть уменьшаем главный заголовок, чтобы он не давил на баннер */
     .page-title { 
         top: 2vh; 
     }
 
-    /* Опускаем баннер ниже и делаем его компактнее внутри */
-    .invite-banner { 
-        top: 10vh; /* Опустили ниже */
-        max-height: 19vh;
-        padding: 12px 15px; 
-        gap: 8px; /* Уменьшили дырки между элементами */
+    /* Поднимаем всю обертку выше */
+    .main-content {
+        top: 10vh;
+        height: 78vh;
     }
 
-    /* Уменьшаем текст в баннере, чтобы он не раздувал высоту */
+    .invite-banner { 
+        max-height: 19vh;
+        padding: 12px 15px; 
+        gap: 8px; 
+    }
+
     .invite-text {
         font-size: clamp(13px, 4.5vw, 32px);
     }
 
-    /* Опускаем заголовок списка ниже баннера */
     .friends-header { 
-        top: 32vh; 
-        font-size: clamp(18px, 5vw, 24px); /* Чуть мельче */
-    }
-
-    /* Опускаем сам список */
-    .friends-container { 
-        top: 38vh; 
-        height: 50vh; 
+        font-size: clamp(18px, 5vw, 24px); 
+        margin-top: 1.5vh; /* Чуть уменьшаем отступ */
     }
 }
 </style>
