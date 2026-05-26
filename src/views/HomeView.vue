@@ -580,8 +580,9 @@ const infoText = computed(() => t('infoModal.text'))
 
 /* --- АДАПТАЦИЯ ПОД НЕВЫСОКИЕ ЭКРАНЫ --- */
 @media screen and (max-height: 700px) {
-    .page-title, .info-button { top: 2vh; }
+    .page-title { top: 2vh; }
     .info-button { right: 2%; }
+    .info-button { top: 1vh; }
     .top-bar { top: 10vh; }
     .progress-section { top: 18vh; }
     
