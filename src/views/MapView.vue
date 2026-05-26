@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
 
@@ -7,14 +7,14 @@ import { t } from '@/locales'
 
 import avatar0 from '@/assets/avatar_0.svg'
 
-const friends = ref([
-    { id: 1, name: 'Имя1', avatar: avatar0 },
-    { id: 2, name: 'Имя2', avatar: avatar0 },
-    { id: 3, name: 'Имя3', avatar: avatar0 },
-    { id: 4, name: 'Имя4', avatar: avatar0 },
-    { id: 5, name: 'Имя5', avatar: avatar0 },
-    { id: 6, name: 'Имя6', avatar: avatar0 },
-    { id: 7, name: 'Имя7', avatar: avatar0 },
+const friends = computed(() => [
+    { id: 1, name: `${t('friends.defaultName')} 1`, avatar: avatar0 },
+    { id: 2, name: `${t('friends.defaultName')} 2`, avatar: avatar0 },
+    { id: 3, name: `${t('friends.defaultName')} 3`, avatar: avatar0 },
+    { id: 4, name: `${t('friends.defaultName')} 4`, avatar: avatar0 },
+    { id: 5, name: `${t('friends.defaultName')} 5`, avatar: avatar0 },
+    { id: 6, name: `${t('friends.defaultName')} 6`, avatar: avatar0 },
+    { id: 7, name: `${t('friends.defaultName')} 7`, avatar: avatar0 },
 ])
 
 const isInviteModalOpen = ref(false)
@@ -267,19 +267,19 @@ const handleInviteSecondaryClick = () => {
     /* Чуть уменьшаем главный заголовок, чтобы он не давил на баннер */
     .page-title { 
         top: 2vh; 
-        font-size: clamp(22px, 6vw, 32px); 
     }
 
     /* Опускаем баннер ниже и делаем его компактнее внутри */
     .invite-banner { 
         top: 10vh; /* Опустили ниже */
+        min-height: 17vh;
         padding: 12px 15px; 
         gap: 8px; /* Уменьшили дырки между элементами */
     }
 
     /* Уменьшаем текст в баннере, чтобы он не раздувал высоту */
     .invite-text {
-        font-size: 13px;
+        font-size: clamp(13px, 4.5vw, 32px);
     }
 
     /* Опускаем заголовок списка ниже баннера */
@@ -290,8 +290,8 @@ const handleInviteSecondaryClick = () => {
 
     /* Опускаем сам список */
     .friends-container { 
-        top: 37vh; 
-        height: 48vh; 
+        top: 38vh; 
+        height: 50vh; 
     }
 }
 </style>

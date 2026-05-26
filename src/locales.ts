@@ -67,6 +67,7 @@ export const locales: Record<string, any> = {
 💰 <b>Exchange for GTR:</b> convert accumulated RP into valuable GTR tokens right on the main screen!`
         },
         friends: {
+            defaultName: 'Name',
             title: 'Friend list',
             inviteBanner: 'Invite friends and earn free tokens',
             details: 'Details',
@@ -131,6 +132,7 @@ export const locales: Record<string, any> = {
 💰 <b>Обмен на GTR:</b> конвертируйте накопленные RP в ценные токены GTR прямо на главном экране!`
         },
         friends: {
+            defaultName: 'Имя',
             title: 'Список друзей',
             inviteBanner: 'Пригласите друзей и зарабатывайте бесплатные токены',
             details: 'Подробности',
@@ -161,7 +163,7 @@ export const locales: Record<string, any> = {
             inviteModaldescription: 'Sind Sie sicher, dass Sie Ihre TON-Wallet trennen möchten?',
         },
         tasks: {
-            title: 'Bonusbelohnungen',
+            title: 'Bonus belohnungen',
             titleSize: 'clamp(22px, 8vw, 110px)', // Чуть уменьшил шрифт, так как слово Bonusbelohnungen длинное
             banner: 'Erledigen Sie einfache Aufgaben, um einen Bonus zu erhalten',
             listHeader: 'Aufgaben',
@@ -195,6 +197,7 @@ export const locales: Record<string, any> = {
 💰 <b>Umtausch in GTR:</b> Wandeln Sie Ihre gesammelten RP direkt auf dem Hauptbildschirm in wertvolle GTR-Token um!`
         },
         friends: {
+            defaultName: 'Name',
             title: 'Freundesliste',
             inviteBanner: 'Freunde einladen und kostenlose Token verdienen',
             details: 'Details',
@@ -259,6 +262,7 @@ export const locales: Record<string, any> = {
 💰 <b>Cambio por GTR:</b> ¡convierte los RP acumulados en valiosos tokens GTR directamente en la pantalla principal!`
         },
         friends: {
+            defaultName: 'Nombre',
             title: 'Lista de amigos',
             inviteBanner: 'Invita a amigos y gana tokens gratis',
             details: 'Detalles',
@@ -323,6 +327,7 @@ export const locales: Record<string, any> = {
 💰 <b>兑换 GTR：</b> 直接在主屏幕上将积累的 RP 兑换成有价值的 GTR 代币！`
         },
         friends: {
+            defaultName: '名字',
             title: '好友列表',
             inviteBanner: '邀请好友并赚取免费代币',
             details: '详情',
@@ -387,6 +392,7 @@ export const locales: Record<string, any> = {
 💰 <b>GTRと交換：</b> メイン画面から直接、貯めたRPを価値あるGTRトークンに交換できます！`
         },
         friends: {
+            defaultName: '名前',
             title: 'フレンドリスト',
             inviteBanner: 'フレンドを招待して無料トークンを稼ごう',
             details: '詳細',
@@ -451,6 +457,7 @@ export const locales: Record<string, any> = {
 💰 <b>Échange contre des GTR :</b> convertissez vos RP accumulés en précieux jetons GTR directement sur l'écran principal !`
         },
         friends: {
+            defaultName: 'Nom',
             title: 'Liste d\'amis',
             inviteBanner: 'Invitez des amis et gagnez des jetons gratuits',
             details: 'Détails',
@@ -515,6 +522,7 @@ export const locales: Record<string, any> = {
 💰 <b>המרה ל-GTR:</b> המר את ה-RP שצברת לאסימוני GTR יקרי ערך ישירות במסך הראשי!`
         },
         friends: {
+            defaultName: 'שם',
             title: 'רשימת חברים',
             inviteBanner: 'הזמן חברים והרווח אסימונים בחינם',
             details: 'פרטים',
@@ -579,6 +587,7 @@ export const locales: Record<string, any> = {
 💰 <b>GTR ile Değiştirin:</b> Biriktirdiğiniz RP'leri doğrudan ana ekranda değerli GTR token'larına dönüştürün!`
         },
         friends: {
+            defaultName: 'İsim',
             title: 'Arkadaş listesi',
             inviteBanner: 'Arkadaşlarınızı davet edin ve ücretsiz token kazanın',
             details: 'Detaylar',
@@ -643,6 +652,7 @@ export const locales: Record<string, any> = {
 💰 <b>Scambia in GTR:</b> converti i tuoi RP accumulati in preziosi token GTR direttamente nella schermata principale!`
         },
         friends: {
+            defaultName: 'Nome',
             title: 'Lista amici',
             inviteBanner: 'Invita amici e guadagna token gratuiti',
             details: 'Dettagli',
