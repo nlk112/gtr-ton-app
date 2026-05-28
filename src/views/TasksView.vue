@@ -3,14 +3,9 @@
 import { ref, computed } from 'vue'
 import BottomNav from '@/components/BottomNav.vue'
 import InviteModal from '@/components/InviteModal.vue'
-// 👇 Импортируем функцию перевода
 import { t } from '@/locales'
 
-import { TonConnectUI } from '@tonconnect/ui'
-
-const tonConnectUI = new TonConnectUI({
-    manifestUrl: 'https://gtr-ton-app.vercel.app/tonconnect-manifest.json'
-});
+import { tonConnectUI } from '@/tonconnect'
 
 import icox from '@/assets/iconx.svg'
 import iconds from '@/assets/iconds.svg'
@@ -27,7 +22,6 @@ interface Task {
     address?: string;
 }
 
-// 👇 Превратили массив в computed, чтобы он автоматически переводился
 const friends = computed<Task[]>(() => [
     { 
         id: 1, 

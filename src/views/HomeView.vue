@@ -16,9 +16,10 @@ import statusNotOkIcon from '@/assets/status_not_ok.svg'
 
 const isWalletOk = ref(false)
 
+import { tonConnectUI } from '@/tonconnect'
+
 import radarBg from '@/assets/radar_background.svg'
 import { ref, computed, onMounted, watch, onUnmounted } from 'vue'
-import { TonConnectUI } from '@tonconnect/ui'
 
 import f0 from '@/assets/radar/radar_0.svg'
 import f1 from '@/assets/radar/radar_1.svg'
@@ -40,8 +41,6 @@ const radarFrames = [f0, f1, f2, f3, f4, f5, f6, f7]
 const currentFrame = ref(0)
 const isAnimating = ref(false)
 const extraCycles = ref(0)
-
-let tonConnectUI: TonConnectUI | null = null
 
 let intervalId: ReturnType<typeof setInterval> | null = null
 let timeoutId: ReturnType<typeof setTimeout> | null = null
@@ -172,11 +171,6 @@ onMounted(() => {
     } else {
         userName.value = 'Dev Mode' // Для тестов в браузере
     }
-
-    tonConnectUI = new TonConnectUI({
-        // Укажи здесь СВОЮ ссылку на манифест!
-        manifestUrl: 'https://gtr-ton-app.vercel.app/tonconnect-manifest.json'
-    });
 
     // Подписываемся на изменение статуса (подключился/отключился)
     tonConnectUI.onStatusChange((wallet) => {
@@ -607,3 +601,4 @@ const infoText = computed(() => t('infoModal.text'))
     .lang-text { font-size: 16px; }
 }
 </style>
+
