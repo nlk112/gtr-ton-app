@@ -49,6 +49,11 @@ onMounted(() => {
 
 
 <style>
+#tc-widget-root {
+    position: relative;
+    z-index: 99999 !important;
+}
+
 *,
 *::before,
 *::after {

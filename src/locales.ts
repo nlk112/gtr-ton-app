@@ -677,3 +677,17 @@ export const t = (path: string): string => {
     }
     return current
 }
+
+    // const handleRadarClick = () => {
+    // score.value += currentLevelInfo.value!.rpPerClick;
+    
+    // progress.value++;
+    
+    // if (progress.value >= currentLevelInfo.value!.clicksNeeded) {
+    //     if (level.value < 20) { 
+    //         level.value++;
+    //         progress.value = 0; 
+    //     } else {
+    //         progress.value = currentLevelInfo.value!.clicksNeeded; 
+    //     }
+    // }

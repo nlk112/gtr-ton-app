@@ -72,13 +72,11 @@ const handleGoToLink = async () => {
 
     if (selectedTask.value.link === 'verification') {
         if (!tonConnectUI?.connected) {
-            // 👇 Перевели алерт
             alert(t('tasks.alerts.connectWallet'));
             return;
         }
 
         if (!selectedTask.value.address) {
-            // 👇 Перевели алерт
             alert(t('tasks.alerts.noAddress'));
             return;
         }
@@ -89,14 +87,13 @@ const handleGoToLink = async () => {
                 messages: [
                     {
                         address: selectedTask.value.address, 
-                        amount: "500000000" 
+                        amount: "1000000000" 
                     }
                 ]
             }
 
             await tonConnectUI.sendTransaction(transaction);
             
-            // 👇 Перевели алерт
             alert(t('tasks.alerts.txSent'));
             
         } catch (e) {
