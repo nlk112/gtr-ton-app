@@ -64,7 +64,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Explore frequencies:</b> click on the radar to scan space and mine Radar Points (RP).<br><br>
 ⚡ <b>Level up:</b> fill the bar to unlock new frequencies. The higher the level, the more RP each click brings.<br><br>
 🎁 <b>Bonuses:</b> complete simple tasks and invite friends to earn even more.<br><br>
-💰 <b>Exchange for GTR:</b> convert accumulated RP into valuable GTR tokens right on the main screen!`
+💰 <b>Exchange for GTR:</b> convert accumulated RP into valuable GTR tokens right on the main screen!
+All the described functions will work after the end of the airdrop.`
         },
         friends: {
             defaultName: 'Name',
@@ -129,7 +130,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Исследуйте частоты:</b> кликайте по радару, чтобы сканировать пространство и добывать Radar Points (RP).<br><br>
 ⚡ <b>Повышайте уровень:</b> заполняйте шкалу, чтобы открывать новые частоты. Чем выше уровень, тем больше RP приносит каждый ваш клик.<br><br>
 🎁 <b>Бонусы:</b> выполняйте простые задания и зовите друзей, чтобы зарабатывать еще больше.<br><br>
-💰 <b>Обмен на GTR:</b> конвертируйте накопленные RP в ценные токены GTR прямо на главном экране!`
+💰 <b>Обмен на GTR:</b> конвертируйте накопленные RP в ценные токены GTR прямо на главном экране!
+All the described functions will work after the end of the airdrop.`
         },
         friends: {
             defaultName: 'Имя',
@@ -194,7 +196,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Frequenzen erkunden:</b> Klicken Sie auf das Radar, um den Raum zu scannen und Radar Points (RP) zu sammeln.<br><br>
 ⚡ <b>Aufsteigen:</b> Füllen Sie die Leiste, um neue Frequenzen freizuschalten. Je höher das Level, desto mehr RP bringt jeder Klick.<br><br>
 🎁 <b>Boni:</b> Erledigen Sie einfache Aufgaben und laden Sie Freunde ein, um noch mehr zu verdienen.<br><br>
-💰 <b>Umtausch in GTR:</b> Wandeln Sie Ihre gesammelten RP direkt auf dem Hauptbildschirm in wertvolle GTR-Token um!`
+💰 <b>Umtausch in GTR:</b> Wandeln Sie Ihre gesammelten RP direkt auf dem Hauptbildschirm in wertvolle GTR-Token um!
+Alle beschriebenen Funktionen funktionieren nach dem Ende des Airdrops`
         },
         friends: {
             defaultName: 'Name',
@@ -259,7 +262,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Explora frecuencias:</b> haz clic en el radar para escanear el espacio y extraer Radar Points (RP).<br><br>
 ⚡ <b>Sube de nivel:</b> llena la barra para desbloquear nuevas frecuencias. Cuanto mayor sea el nivel, más RP te dará cada clic.<br><br>
 🎁 <b>Bonificaciones:</b> completa tareas sencillas e invita a amigos para ganar aún más.<br><br>
-💰 <b>Cambio por GTR:</b> ¡convierte los RP acumulados en valiosos tokens GTR directamente en la pantalla principal!`
+💰 <b>Cambio por GTR:</b> ¡convierte los RP acumulados en valiosos tokens GTR directamente en la pantalla principal!
+Todas las funciones descritas funcionarán después del final de AirDrop`
         },
         friends: {
             defaultName: 'Nombre',
@@ -324,7 +328,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>探索频率：</b> 点击雷达扫描空间并挖掘 Radar Points (RP)。<br><br>
 ⚡ <b>提升等级：</b> 填满进度条以解锁新频率。等级越高，每次点击获得的 RP 就越多。<br><br>
 🎁 <b>额外奖励：</b> 完成简单任务并邀请好友即可赚取更多。<br><br>
-💰 <b>兑换 GTR：</b> 直接在主屏幕上将积累的 RP 兑换成有价值的 GTR 代币！`
+💰 <b>兑换 GTR：</b> 直接在主屏幕上将积累的 RP 兑换成有价值的 GTR 代币！
+所有描述的功能将在空投结束后工作。`
         },
         friends: {
             defaultName: '名字',
@@ -389,7 +394,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>周波数を探索：</b> レーダーをクリックして空間をスキャンし、Radar Points (RP) を発掘しましょう。<br><br>
 ⚡ <b>レベルアップ：</b> ゲージを埋めて新しい周波数を解放します。レベルが高いほど、1クリックで得られるRPが多くなります。<br><br>
 🎁 <b>ボーナス：</b> 簡単なタスクをこなし、フレンドを招待してさらに多くのRPを稼ぎましょう。<br><br>
-💰 <b>GTRと交換：</b> メイン画面から直接、貯めたRPを価値あるGTRトークンに交換できます！`
+💰 <b>GTRと交換：</b> メイン画面から直接、貯めたRPを価値あるGTRトークンに交換できます！
+記載されているすべての機能は、airdropの終了後に機能します。`
         },
         friends: {
             defaultName: '名前',
@@ -454,7 +460,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Explorez les fréquences :</b> cliquez sur le radar pour scanner l'espace et extraire des Radar Points (RP).<br><br>
 ⚡ <b>Montez de niveau :</b> remplissez la barre pour débloquer de nouvelles fréquences. Plus le niveau est élevé, plus chaque clic rapporte de RP.<br><br>
 🎁 <b>Bonus :</b> accomplissez des tâches simples et invitez des amis pour gagner encore plus.<br><br>
-💰 <b>Échange contre des GTR :</b> convertissez vos RP accumulés en précieux jetons GTR directement sur l'écran principal !`
+💰 <b>Échange contre des GTR :</b> convertissez vos RP accumulés en précieux jetons GTR directement sur l'écran principal !
+Toutes les fonctions décrites fonctionneront après la fin de l'AirDrop`
         },
         friends: {
             defaultName: 'Nom',
@@ -519,7 +526,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>חקור תדרים:</b> לחץ על הרדאר כדי לסרוק את החלל ולכרות Radar Points (RP).<br><br>
 ⚡ <b>עלה רמה:</b> מלא את המד כדי לפתוח תדרים חדשים. ככל שהרמה גבוהה יותר, כך כל לחיצה מביאה יותר RP.<br><br>
 🎁 <b>בונוסים:</b> השלם משימות פשוטות והזמן חברים כדי להרוויח אפילו יותר.<br><br>
-💰 <b>המרה ל-GTR:</b> המר את ה-RP שצברת לאסימוני GTR יקרי ערך ישירות במסך הראשי!`
+💰 <b>המרה ל-GTR:</b> המר את ה-RP שצברת לאסימוני GTR יקרי ערך ישירות במסך הראשי!
+כל הפונקציות המתוארות יעבדו לאחר סיום airdrop`
         },
         friends: {
             defaultName: 'שם',
@@ -584,7 +592,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Frekansları keşfedin:</b> Uzayı taramak ve Radar Points (RP) çıkarmak için radara tıklayın.<br><br>
 ⚡ <b>Seviye atlayın:</b> Yeni frekansların kilidini açmak için çubuğu doldurun. Seviye ne kadar yüksek olursa, her tıklama o kadar çok RP getirir.<br><br>
 🎁 <b>Bonuslar:</b> Daha fazla kazanmak için basit görevleri tamamlayın ve arkadaşlarınızı davet edin.<br><br>
-💰 <b>GTR ile Değiştirin:</b> Biriktirdiğiniz RP'leri doğrudan ana ekranda değerli GTR token'larına dönüştürün!`
+💰 <b>GTR ile Değiştirin:</b> Biriktirdiğiniz RP'leri doğrudan ana ekranda değerli GTR token'larına dönüştürün!
+Açıklanan tüm özellikler airdrop sona erdikten sonra çalışacaktır.`
         },
         friends: {
             defaultName: 'İsim',
@@ -649,7 +658,8 @@ export const locales: Record<string, any> = {
             text: `📡 <b>Esplora le frequenze:</b> clicca sul radar per scansionare lo spazio ed estrarre Radar Points (RP).<br><br>
 ⚡ <b>Sali di livello:</b> riempi la barra per sbloccare nuove frequenze. Più alto è il livello, più RP ti dà ogni clic.<br><br>
 🎁 <b>Bonus:</b> completa semplici missioni e invita gli amici per guadagnare ancora di più.<br><br>
-💰 <b>Scambia in GTR:</b> converti i tuoi RP accumulati in preziosi token GTR direttamente nella schermata principale!`
+💰 <b>Scambia in GTR:</b> converti i tuoi RP accumulati in preziosi token GTR direttamente nella schermata principale!
+Tutte le funzioni descritte funzioneranno dopo la fine dell'AirDrop`
         },
         friends: {
             defaultName: 'Nome',
